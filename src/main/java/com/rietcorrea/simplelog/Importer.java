@@ -88,7 +88,7 @@ public class Importer {
 
 		return newCrew;
 	}
-
+ 
 	public Airport importAirport(String[] line, int airportIcaoCol, int airportIataCol, int airportNameCol,
 			int airportCityCol, int airportCountryCol, int airportLatCol, int airportLonCol) {
 
