@@ -503,7 +503,7 @@ public class ImporterFlight {
 			try {
 				simpleDateFormat.parse(line[date]);
 			} catch (ParseException e) {
-				result.add(lineNumber+"\n");
+				result.add("Invalid date format on line: " + lineNumber+"\n");
 			}
 			lineNumber++;
 		}
@@ -518,12 +518,12 @@ public class ImporterFlight {
 				try {
 					Long.parseLong(line[depTime]);
 				} catch (NumberFormatException e) {
-					result.add(lineNumber+" (departure)\n");
+					result.add("Invalid departure time format on line: " + lineNumber+"\n");
 				}
 				try {
 					Long.parseLong(line[arrTime]);
 				} catch (NumberFormatException e) {
-					result.add(lineNumber+" (arrival)\n");
+					result.add("Invalid arrival time format on line: " + lineNumber+"\n");
 				}
 				lineNumber++;
 			}
@@ -535,7 +535,7 @@ public class ImporterFlight {
 					try {
 						simpleTimeFormat.parse(line[depTime]);
 					} catch (ParseException e) {
-						result.add(lineNumber+" (departure)\n");
+						result.add("Invalid departure time format on line: " + lineNumber+" (departure)\n");
 					}
 				}
 	
@@ -543,7 +543,7 @@ public class ImporterFlight {
 					try {
 						simpleTimeFormat.parse(line[arrTime]);
 					} catch (ParseException e) {
-						result.add(lineNumber+" (arrival)\n");
+						result.add("Invalid arrival time format on line: " + lineNumber+" (arrival)\n");
 					}
 				}
 				lineNumber++;
@@ -556,26 +556,36 @@ public class ImporterFlight {
 		List<String> result = new ArrayList<String>();
 		int lineNumber = 1;
 		for (String[] line : lines) {
-			try {
-				Integer.valueOf(line[takeoffDay]);
-			} catch (NumberFormatException e) {
-				result.add("Take-off Day on line: "+lineNumber+"\n");
+			if(takeoffDay >= 0) {
+				try {
+					Integer.valueOf(line[takeoffDay]);
+				} catch (NumberFormatException e) {
+					result.add("Invalid Take-off Day on line: "+lineNumber+"\n");
+				}
 			}
 		
-			try {
-				Integer.valueOf(line[takeoffNight]);
-			} catch (NumberFormatException e) {
-				result.add("Take-off Night on line: "+lineNumber+"\n");
+			if(takeoffNight >= 0) {
+				try {
+					Integer.valueOf(line[takeoffNight]);
+				} catch (NumberFormatException e) {
+					result.add("Invalid Take-off Night on line: "+lineNumber+"\n");
+				}
 			}
-			try {
-				Integer.valueOf(line[landingDay]);
-			} catch (NumberFormatException e) {
-				result.add("Landing Day on line: "+lineNumber+"\n");
+			
+			if(landingDay >= 0) {
+				try {
+					Integer.valueOf(line[landingDay]);
+				} catch (NumberFormatException e) {
+					result.add("Invalid Landing Day on line: "+lineNumber+"\n");
+				}
 			}
-			try {
-				Integer.valueOf(line[landingNight]);
-			} catch (NumberFormatException e) {
-				result.add("Landing Night on line: "+lineNumber+"\n");
+			
+			if(landingNight >= 0) {
+				try {
+					Integer.valueOf(line[landingNight]);
+				} catch (NumberFormatException e) {
+					result.add("Invalid Landing Night on line: "+lineNumber+"\n");
+				}
 			}
 			lineNumber++;
 		}

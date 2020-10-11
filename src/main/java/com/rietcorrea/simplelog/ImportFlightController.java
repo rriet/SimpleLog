@@ -592,7 +592,7 @@ public class ImportFlightController implements Initializable {
     	if (!cmbDateFormat.getValue().equals(StrEng.DATE_EPOCH_TIME)){
     		warninList = importer.checkDateFormat();
     		if (warninList.size() > 0) {
-    			writeErrors("Invalid date format in line: ", warninList);
+    			writeErrors(warninList);
 	    		error = true;
     		}
     	}
@@ -600,7 +600,7 @@ public class ImportFlightController implements Initializable {
     	// Check Dep and Arr time values
 		warninList = importer.checkTimeFormat();
 		if (warninList.size() > 0) {
-			writeErrors("Invalid time format in line: ", warninList);
+			writeErrors(warninList);
 			if(!chkIgnoreDepArrTime.isSelected()) {
 				error = true;
 			}
@@ -614,13 +614,37 @@ public class ImportFlightController implements Initializable {
     @FXML
     void btnNextRmkAction(ActionEvent event) {
     	txtWarning.setText("");
+    	importer.setRemarks(cmbRemarks.getSelectionModel().getSelectedIndex())
+    			.setPrivateNotes(cmbPrivateNotes.getSelectionModel().getSelectedIndex());
     	tabPane.getSelectionModel().select(tabLanding);
     }
     
     @FXML
     void btnNextLandingAction(ActionEvent event) {
     	txtWarning.setText("");
-    	tabPane.getSelectionModel().select(tabTimes);
+    	boolean error = false;
+    	List<String> warninList = new ArrayList<String>();
+    	
+    	importer.setPfPnf(cmbPfPnf.getSelectionModel().getSelectedIndex())
+    			.setTakeoffDay(cmbTakeOffDay.getSelectionModel().getSelectedIndex())
+				.setTakeoffNight(cmbTakeOffNight.getSelectionModel().getSelectedIndex())
+				.setLandingDay(cmbLandingDay.getSelectionModel().getSelectedIndex())
+				.setLandingNight(cmbLandingNight.getSelectionModel().getSelectedIndex());
+    	
+    	
+    	
+    	// Check landing values are valid
+		warninList = importer.checkTakeOffLandings();
+		if (warninList.size() > 0) {
+			writeErrors(warninList);
+			if(!chkReCalcToLdg.isSelected()) {
+				error = true;
+			}
+		}
+		
+		if (!error) {
+			tabPane.getSelectionModel().select(tabTimes);
+		}
     }
     
     @FXML
@@ -690,11 +714,10 @@ public class ImportFlightController implements Initializable {
     	tabPane.getSelectionModel().select(tabDate);
     }    
     
-    private void writeErrors(String error, List<String> errorList) {
+    private void writeErrors(List<String> errorList) {
     	StringBuilder sb=new StringBuilder("ERROR!\n");  
     	for (String errorLine : errorList) {
-    		sb.append(error + errorLine);
-    		//txtWarning.appendText(error + errorLine);
+    		sb.append(errorLine);
 		}
     	txtWarning.appendText(sb.toString());
 	}
