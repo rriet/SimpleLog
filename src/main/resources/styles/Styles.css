@@ -1,0 +1,39 @@
+.root{
+    -fx-background-color: rgb(105,139,166);
+}
+#mainPane {
+    -fx-background-color: rgb(105,139,166);
+}
+#menu {
+    -fx-background-color: #053d6a;
+}
+
+#quit.button{
+    -fx-background-radius: 50px;
+}
+
+#menu.button {
+    -fx-pref-height: 50px;
+    -fx-pref-width: 160px;
+    -fx-font-size: 15px;
+    -fx-alignment: center-left;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 0px;
+    
+}
+
+#menu.button:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    
+}
+
+#menuSelected.button{
+    -fx-background-color: rgb(105,139,166);
+    -fx-text-fill: #000000;
+}
+
+#floatingButton.button{
+    -fx-alignment: bottom-right;
+    -fx-text-fill: #000000;
+}

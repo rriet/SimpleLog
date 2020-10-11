@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" maxHeight="760.0" maxWidth="900.0" minHeight="760.0" minWidth="900.0" prefHeight="760.0" prefWidth="900.0" stylesheets="@../styles/Tab.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rietcorrea.simplelog.ImportFlightController">
+    <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <TabPane fx:id="tabPane" focusTraversable="false" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                  <tabs>
+                      <Tab fx:id="tabDate" text="Date">
+                          <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <children>
+                                    <Label text="Flight Import Wizzard">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Note: Importing databases is a complex procedure, and the success will depend on the quality of the file you are trying to import.&#10;&#10;This wizzard tries to verify that the correct data is consistently available in the file and will display warning messages on the bottom if any problems are found. The best way to proceed is to open the file in a plain text editor  or excel and fix the problem.&#10;&#10;The importing tool will follow the &quot;Duplicated Flight&quot; selection when the flight beeing imported has the same Chocks-Off date and Time of a existing flight. If you have more than one flight in the same day with invalid departure time, they will be considered duplicated." textAlignment="JUSTIFY" wrapText="true" />
+                                    <Label text="Items in RED are required." textFill="RED" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="Duplicated Flight:" textFill="RED">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbDuplicatedFlight" prefWidth="300.0" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Select the date and time format that is used in the file beeing imported.&#10;&#10;Note: Epoch time is is a system for describing a point in time. It is the number of seconds that have elapsed since the Unix epoch, minus leap seconds; the Unix epoch is 00:00:00 UTC on 1 January 1970.&#10;" wrapText="true" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="Date and Time Format:" textFill="RED">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbDateFormat" onAction="#cmbDateFormatAction" prefWidth="300.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label fx:id="lblDepDate" text="Flight departure date:" textFill="RED">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbDate" prefWidth="350.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <HBox spacing="5.0">
+                                                   <children>
+                                                      <Label fx:id="lblDepTime" text="Flight Chocks-Off Time:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="cmbDepTime" prefWidth="350.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox spacing="5.0">
+                                                   <children>
+                                                      <Label fx:id="lblArrTime" text="Flight Chocks-On Time:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="cmbArrTime" prefWidth="350.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <CheckBox fx:id="chkIgnoreDepArrTime" mnemonicParsing="false" text="Ignore Time Errors">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </CheckBox>
+                                       </children>
+                                    </HBox>
+                                    <Label text="If your file doen't have the departure and arrival time for all the flights, you may choose to &quot;Ignore Time Errors&quot;. With this option selected, any Chocks-Off or Chocks-On time that is not valid or in the format HH:MM, will be set to 00:00 UTC.&#10;&#10;&quot;Ignore Time Errors&quot; option is not available if you are using EPOCH format.&#10;&#10;You must have valid chocks-off and chocks-on times if you plan to Re-calculate landings and/or night time." wrapText="true" />
+                                    <VBox spacing="5.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <CheckBox fx:id="chkReCalcToLdg" mnemonicParsing="false" onAction="#clickReCalcToLdg" text="Recalculate Take-offs and Landings">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </CheckBox>
+                                          <CheckBox fx:id="chkReCalcTimeNight" mnemonicParsing="false" onAction="#clickReCalcNightTime" text="Recalculate Night Time">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </CheckBox>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <HBox alignment="CENTER_RIGHT">
+                                       <children>
+                                          <Button fx:id="btnNextDate" minWidth="120.0" mnemonicParsing="false" onAction="#btnNextDateAction" text="Next" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                          </content>
+                      </Tab>
+                  <Tab fx:id="tabRmk" text="RMK">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="133.0" layoutY="169.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <children>
+                                    <Label text="Remarks and Notes">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Remarks and Private notes are text fields with maximum length of 500 character. Any text exceeding this length will be cropped to fit.&#10;&#10;Remarks are normally printed in the logbook.&#10;&#10;Private Notes will not be printed, they are only be used for searching a specific flight, and saving personal notes about a flight." wrapText="true" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="Flight Remarks:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbRemarks" prefWidth="350.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="Private Notes:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbPrivateNotes" prefWidth="350.0" />
+                                       </children>
+                                    </HBox>
+                                    <VBox VBox.vgrow="ALWAYS" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#btnBackRmkAction" prefWidth="120.0" text="Back" />
+                                          <Button mnemonicParsing="false" onAction="#btnNextRmkAction" prefWidth="120.0" text="Next" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabLanding" text="Landing">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <children>
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="PF/PNF:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbPfPnf" prefWidth="350.0" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="PF/PNF field is a column holding the pilot funciont during the flight. The valid inputs are:&#10;&#10;&quot;PF&quot; -  1 Take-off and 1 landing&#10;&quot;PNF&quot; - No take-off or landing&#10;&quot;PF/PNF&quot; - 1 Take-off and no landing&#10;&quot;PNF/PF&quot; - No take-off and 1 Landing&#10;&quot;IRP 3&quot; - No take-off or Landings, and flight time will count as 2/3 of the actual total time&#10;&quot;IRP 4&quot;- No Take-off or Landing, and flight flight time will count as 1/2 of the actual total time&#10;&#10;Note: Any invalid &quot;PF/PNF&quot; input will be considered PF.&#10;&#10;If the column is NOT selected, the importer will use the take-off and landing information to determine the PF/PNF status.&#10;&#10;To recalculate take-offs and landings, the system will use the departure and arrival times to calculate if take-off and landing was performed during day or night, according to the &quot;PF/PNF&quot; rules." wrapText="true" />
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.0" minWidth="10.0" prefWidth="184.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="695.0" minWidth="10.0" prefWidth="657.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="lblToDay" text="Take-Off Day:" textFill="RED">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label fx:id="lblToNight" text="Take-Off Night:" textFill="RED" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label fx:id="lblLdgDay" text="Landing Day:" textFill="RED" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label fx:id="lblLdgNight" text="Landing Night:" textFill="RED" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <ComboBox fx:id="cmbTakeOffDay" prefWidth="350.0" GridPane.columnIndex="1" />
+                                          <ComboBox fx:id="cmbTakeOffNight" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="cmbLandingDay" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cmbLandingNight" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                    <VBox VBox.vgrow="ALWAYS" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#btnBackLandingAction" prefWidth="120.0" text="Back" />
+                                          <Button mnemonicParsing="false" onAction="#btnNextLandingAction" prefWidth="120.0" text="Next" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabTimes" text="Times">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <VBox AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <children>
+                                    <Label text="Flight Times:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Flight times can be formatted as: &#10; - Formatted hour (hour : minutes) Example: &quot;0:34&quot; , &quot;1:43&quot;, &quot;03:22&quot;, &quot;11:05&quot;&#10; - Integer number (number of minutes)  Example: &quot;1&quot;, &quot;300&quot;, &quot;245&quot;&#10; - Decimal number (number of hours . decimal of the hour) Example: &quot;3.22&quot;, &quot;0.15&quot;, &quot;1&quot;, &quot;11.1&quot;&#10;&#10;The maximum values for hours are 23:59 or 1439 min or 23.93&#10;Note: Invalid Hours will fail the import." wrapText="true" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="%LabelFlightTimeFormat">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbHourFormat" prefWidth="230.0" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Recalculate IFR and Cross Country option will follow the main configurations.&#10;The recalculate Night Time option will use the Date, departure Time, arrival Time, departure Airport and arrival ariport to calculate the night time." wrapText="true" />
+                                    <GridPane>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="255.0" minWidth="100.0" prefWidth="240.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="329.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="120.0" prefWidth="252.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label text="%LabelFlightIfrTime">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightCrossCountryTime" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightNightTime" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightPicTime" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightSicTime" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightDualTime" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightInstructorTime" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightSimulatorTime" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightTotalTime" textFill="RED" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="%LabelFlightPicusTime" GridPane.rowIndex="4">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbTimeIfr" prefWidth="345.0" GridPane.columnIndex="1" />
+                                          <CheckBox fx:id="chkReCalcIfr" mnemonicParsing="false" onAction="#recalcIfrAction" text="%CheckBoxRecalculate" GridPane.columnIndex="2">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </CheckBox>
+                                          <ComboBox fx:id="cmbTimeNight" prefWidth="460.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cmbTimeXc" prefWidth="345.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chkReCalcTimeXc" mnemonicParsing="false" onAction="#recalcXcAction" text="%CheckBoxRecalculate" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </CheckBox>
+                                          <ComboBox fx:id="cmbTimePic" prefWidth="460.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cmbTimePicus" prefWidth="460.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                                          <ComboBox fx:id="cmbTimeSic" prefWidth="460.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                                          <ComboBox fx:id="cmbTimeDual" prefWidth="460.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                                          <ComboBox fx:id="cmbTimeInstructor" prefWidth="460.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                                          <ComboBox fx:id="cmbTimeSimulator" prefWidth="460.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+                                          <ComboBox fx:id="cmbTimeTotal" prefWidth="345.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                       </children>
+                                    </GridPane>
+                                    <VBox VBox.vgrow="ALWAYS" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#btnBackTimesAction" prefWidth="120.0" text="Back" />
+                                          <Button mnemonicParsing="false" onAction="#btnNextTimesAction" prefWidth="120.0" text="Next" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                      <Tab fx:id="tabType" text="Type">
+                          <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                                  <VBox AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                      <children>
+                                 <Label text="Aircraft Model">
+                                    <font>
+                                       <Font size="18.0" />
+                                    </font>
+                                 </Label>
+                                 <Label text="Aircraft model must have a minimum of 2 characteres. Aircraft Model and Group must have a maximum of 20 characters.&#10;Valid Engine types are: Turbofan, Turboprop, Piston and Glider.&#10;&#10;Note: Any different value will be imported as Turbofan&#10;&#10;Note: MTOW must be a number. If it's not a valid number it will be imported as 0 (Zero)&#10;&#10;For the columns Multi-Pilot, Multi-Engine and EFIS, the values &quot;1&quot;, &quot;true&quot;, &quot;yes&quot;, &quot;sim&quot; and &quot;checked&quot; will be imported as true (checked box). All other values will be considered false (unchecked box).&#10;&#10;If you select to override model, models with the same &quot;Make and Model&quot; information will be overriten in the database. This will affect all the aircrafts using this model.&#10;" wrapText="true" />
+                                          <GridPane>
+                                              <columnConstraints>
+                                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="255.0" minWidth="100.0" prefWidth="43.0" />
+                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="476.0" />
+                                       <ColumnConstraints />
+                                              </columnConstraints>
+                                              <rowConstraints>
+                                                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              </rowConstraints>
+                                              <VBox.margin>
+                                                  <Insets left="10.0" right="10.0" top="10.0" />
+                                              </VBox.margin>
+                                              <children>
+                                                  <Label text="%LabelModelMakeAndModel" textFill="RED">
+                                                      <padding>
+                                                          <Insets right="10.0" />
+                                                      </padding>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelModelGroup" GridPane.rowIndex="1">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelModelMtow" GridPane.rowIndex="2">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelModelEngine" GridPane.rowIndex="3">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelModelMultiPilot" GridPane.rowIndex="4">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelModelMultiEngine" GridPane.rowIndex="5">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelModelEfis" GridPane.rowIndex="6">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                       <Label text="%LabelModelSeaplane" GridPane.rowIndex="7">
+                                          <GridPane.margin>
+                                             <Insets right="10.0" />
+                                          </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </Label>
+                                                  <ComboBox fx:id="cmbAircraftModel" prefWidth="420.0" GridPane.columnIndex="1" />
+                                                  <ComboBox fx:id="cmbAircraftGroup" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                  <ComboBox fx:id="cmbAircraftModelMtow" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                  <ComboBox fx:id="cmbAircraftEngineType" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                  <ComboBox fx:id="cmbAircraftMultiPilot" prefWidth="420.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                                                  <ComboBox fx:id="cmbAircraftMultiEngine" prefWidth="420.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                                                  <ComboBox fx:id="cmbAircraftEfis" prefWidth="420.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                                       <ComboBox fx:id="cmbAircraftSeaplane" prefWidth="420.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                                              </children>
+                                          </GridPane>
+                                 <VBox VBox.vgrow="ALWAYS" />
+                                 <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                    <children>
+                                       <CheckBox fx:id="chkOverrideModel" mnemonicParsing="false" text="%CheckBoxOverrideModel">
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font></CheckBox>
+                                       <Button mnemonicParsing="false" onAction="#btnBackTypeAction" prefWidth="120.0" text="Back" />
+                                       <Button mnemonicParsing="false" onAction="#btnNextTypeAction" prefWidth="120.0" text="Next" />
+                                    </children>
+                                 </HBox>
+                                      </children>
+                                  </VBox>
+                              </AnchorPane>
+                          </content>
+                      </Tab>
+                  <Tab fx:id="tabAircraft" text="Aircraft">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="14.0" layoutY="134.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <children>
+                                    <Label text="Aircraft">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Aircraft Registration must be between 2 and 20 characters. &#10;&#10;Aircraft MTOW must be a number. If it is a invalid number it will be imported as 0 (zero)&#10;&#10;For the column &quot;simulator&quot; the values &quot;1&quot;, &quot;true&quot;, &quot;yes&quot;, &quot;sim&quot; and &quot;checked&quot; will be imported as true (checked box). All other values will be considered false (unchecked box).&#10;&#10;If you select to override Aircraft, all aircraft with the same &quot;Registration&quot; will be overriten in the database.&#10;" wrapText="true" />
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="187.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="654.0" minWidth="10.0" prefWidth="654.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="%LabelRegistration" textFill="RED">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbAircraftRegistration" prefWidth="420.0" GridPane.columnIndex="1" />
+                                          <Label text="%LabelAircraftMtow" GridPane.rowIndex="1">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbAircraftMtow" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="%LabelSimulator" GridPane.rowIndex="2">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cmbAircraftSimulator" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <VBox VBox.vgrow="ALWAYS" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                       <children>
+                                          <CheckBox fx:id="chkOverrideAircraft" mnemonicParsing="false" text="%CheckBoxOverrideAircraft">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </CheckBox>
+                                          <Button mnemonicParsing="false" onAction="#btnBackAircraftAction" prefWidth="120.0" text="Back" />
+                                          <Button mnemonicParsing="false" onAction="#btnNextAircraftAction" prefWidth="120.0" text="Next" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                      <Tab fx:id="tabAirport" text="Airport">
+                          <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                                  <VBox AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                      <children>
+                                 <Label text="Airport">
+                                    <font>
+                                       <Font size="18.0" />
+                                    </font>
+                                 </Label>
+                                 <Label text="All Airports must have 4 characters ICAO code or  3 characters IATA code.&#10;&#10;Note: If your file only has 3 characters IATA code, you may import it, provided the airport already exists in the database.&#10;&#10;Airport Name, City and Country are limited to 100 Characters. Any exceeding text will be cropped&#10;&#10;Latitude and Longitude must be a number representing the Degree and Decima of degree. Positive Latitude is North and Positive Longitude is East. Any invalid number will be imported as 0 (zero)&#10;&#10;If you select to override Airport, all airports with the same &quot;ICAO&quot; will be overriten in the database." wrapText="true" />
+                                 <GridPane>
+                                   <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                   </columnConstraints>
+                                   <rowConstraints>
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                   </rowConstraints>
+                                    <children>
+                                       <RadioButton fx:id="radioUseIcao" mnemonicParsing="false" onAction="#clickUseIcao" selected="true" text="%RadioUseIcao" GridPane.halignment="CENTER">
+                                          <toggleGroup>
+                                             <ToggleGroup fx:id="grpAirport" />
+                                          </toggleGroup>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </RadioButton>
+                                       <RadioButton fx:id="radioUseIata" mnemonicParsing="false" onAction="#clickUseIata" text="%RadioUseIata" toggleGroup="$grpAirport" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font></RadioButton>
+                                    </children>
+                                    <VBox.margin>
+                                       <Insets top="20.0" />
+                                    </VBox.margin>
+                                 </GridPane>
+                                          <GridPane>
+                                              <columnConstraints>
+                                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="255.0" minWidth="100.0" prefWidth="43.0" />
+                                                  <ColumnConstraints hgrow="SOMETIMES" />
+                                       <ColumnConstraints hgrow="SOMETIMES" />
+                                              </columnConstraints>
+                                              <rowConstraints>
+                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              </rowConstraints>
+                                              <VBox.margin>
+                                                  <Insets left="10.0" right="10.0" top="10.0" />
+                                              </VBox.margin>
+                                              <children>
+                                                  <Label fx:id="lblDepIcao" text="%LabelAirportIcao" textFill="RED" GridPane.rowIndex="1">
+                                                      <padding>
+                                                          <Insets right="10.0" />
+                                                      </padding>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label fx:id="lblDepIata" text="%LabelAirportIata" GridPane.rowIndex="2">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelAirportName" GridPane.rowIndex="3">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelAirportCity" GridPane.rowIndex="4">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelAirportCountry" GridPane.rowIndex="5">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelAirportLatitude" GridPane.rowIndex="6">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <Label text="%LabelAirportLongitude" GridPane.rowIndex="7">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                                  </Label>
+                                                  <ComboBox fx:id="cmbDepIcao" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                  <ComboBox fx:id="cmbDepIata" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                  <ComboBox fx:id="cmbDepName" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                  <ComboBox fx:id="cmbDepCity" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                  <ComboBox fx:id="cmbDepCountry" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                                                    <ComboBox fx:id="cmbDepLat" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                    <ComboBox fx:id="cmbDepLon" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                  <ComboBox fx:id="cmbArrIcao" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                       </ComboBox>
+                                                  <ComboBox fx:id="cmbArrIata" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                       </ComboBox>
+                                                  <ComboBox fx:id="cmbArrName" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                       </ComboBox>
+                                                  <ComboBox fx:id="cmbArrCity" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                       </ComboBox>
+                                                  <ComboBox fx:id="cmbArrCountry" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                       </ComboBox>
+                                                    <ComboBox fx:id="cmbArrLat" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                       </ComboBox>
+                                                    <ComboBox fx:id="cmbArrLon" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                       </ComboBox>
+                                       <Label text="%LabelDepartureAirport" GridPane.columnIndex="1">
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font></Label>
+                                       <Label text="%LabelArrivalAirport" GridPane.columnIndex="2">
+                                          <GridPane.margin>
+                                             <Insets left="10.0" />
+                                          </GridPane.margin>
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </Label>
+                                              </children>
+                                          </GridPane>
+                                 <VBox VBox.vgrow="ALWAYS" />
+                                 <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                    <children>
+                                       <CheckBox fx:id="chkOverrideAirports" mnemonicParsing="false" text="%CheckBoxOverrideAirport">
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font></CheckBox>
+                                       <Button mnemonicParsing="false" onAction="#btnBackAirportAction" prefWidth="120.0" text="Back" />
+                                       <Button mnemonicParsing="false" onAction="#btnNextAirportAction" prefWidth="120.0" text="Next" />
+                                    </children>
+                                 </HBox>
+                                      </children>
+                                  </VBox>
+                              </AnchorPane>
+                          </content>
+                      </Tab>
+                      <Tab fx:id="tabCrew" text="Crew">
+                          <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                              <children>
+                                 <Label text="Crew">
+                                    <font>
+                                       <Font size="18.0" />
+                                    </font>
+                                 </Label>
+                                 <Label text="PIC name  must have a minimum of 2 characteres.  Crew Name and email must have a maximum of 200 characters, phone number 20 characters and comments 500 characters.&#10;&#10;You may chose to modify the names to UPPERCASE, lowercase, First Case Upper, or import without modification.&#10;&#10;If you select to override Crew, all crew with the same &quot;Name&quot; will be overriten in the database.&#10;&#10;" wrapText="true" />
+                                 <HBox spacing="5.0">
+                                    <children>
+                                       <Label text="Modify Crew Name:">
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </Label>
+                                                    <ComboBox fx:id="cmbCrewNameFormat" prefHeight="27.0" prefWidth="200.0" />
+                                    </children>
+                                 </HBox>
+                                 <HBox>
+                                    <children>
+                                              <VBox HBox.hgrow="ALWAYS">
+                                                  <children>
+                                                      <HBox prefHeight="30.0" prefWidth="200.0">
+                                                          <children>
+                                                              <Label text="%LabelImportPic">
+                                                                  <HBox.margin>
+                                                                      <Insets left="10.0" right="10.0" top="10.0" />
+                                                                  </HBox.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                          </children>
+                                                      </HBox>
+                                                      <GridPane>
+                                                          <columnConstraints>
+                                                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="255.0" minWidth="100.0" prefWidth="43.0" />
+                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="476.0" />
+                                                          </columnConstraints>
+                                                          <rowConstraints>
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          </rowConstraints>
+                                                          <VBox.margin>
+                                                              <Insets left="10.0" right="10.0" top="10.0" />
+                                                          </VBox.margin>
+                                                          <children>
+                                                              <Label text="%LabelCrewName" textFill="RED">
+                                                      <GridPane.margin>
+                                                         <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <Label text="%LabelCrewPhone" GridPane.rowIndex="2">
+                                                                  <GridPane.margin>
+                                                                      <Insets right="10.0" />
+                                                                  </GridPane.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <Label text="%LabelCrewEmail" GridPane.rowIndex="1">
+                                                                  <GridPane.margin>
+                                                                      <Insets right="10.0" />
+                                                                  </GridPane.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <Label text="%LabelCrewComments" GridPane.rowIndex="3">
+                                                                  <GridPane.margin>
+                                                                      <Insets right="10.0" />
+                                                                  </GridPane.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <HBox prefWidth="200.0" GridPane.columnIndex="1">
+                                                                  <children>
+                                                                      <ComboBox fx:id="cmbPicName" prefWidth="420.0" />
+                                                                  </children>
+                                                              </HBox>
+                                                              <ComboBox fx:id="cmbPicEmail" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                              <ComboBox fx:id="cmbPicPhone" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                              <ComboBox fx:id="cmbPicComments" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                          </children>
+                                                      </GridPane>
+                                             <HBox prefHeight="40.0" prefWidth="200.0">
+                                                <children>
+                                                   <Label text="%LabelImportSic">
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" right="10.0" top="10.0" />
+                                                      </HBox.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                   </Label>
+                                                </children>
+                                                <padding>
+                                                   <Insets top="20.0" />
+                                                </padding>
+                                             </HBox>
+                                                      <GridPane>
+                                                          <columnConstraints>
+                                                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="255.0" minWidth="100.0" prefWidth="43.0" />
+                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="476.0" />
+                                                          </columnConstraints>
+                                                          <rowConstraints>
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          </rowConstraints>
+                                                          <VBox.margin>
+                                                              <Insets left="10.0" right="10.0" top="10.0" />
+                                                          </VBox.margin>
+                                                          <children>
+                                                              <Label text="%LabelCrewName">
+                                                                  <padding>
+                                                                      <Insets right="10.0" />
+                                                                  </padding>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <Label text="%LabelCrewPhone" GridPane.rowIndex="2">
+                                                                  <GridPane.margin>
+                                                                      <Insets right="10.0" />
+                                                                  </GridPane.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <Label text="%LabelCrewEmail" GridPane.rowIndex="1">
+                                                                  <GridPane.margin>
+                                                                      <Insets right="10.0" />
+                                                                  </GridPane.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <Label text="%LabelCrewComments" GridPane.rowIndex="3">
+                                                                  <GridPane.margin>
+                                                                      <Insets right="10.0" />
+                                                                  </GridPane.margin>
+                                                      <font>
+                                                         <Font size="18.0" />
+                                                      </font>
+                                                              </Label>
+                                                              <ComboBox fx:id="cmbSicEmail" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                              <ComboBox fx:id="cmbSicPhone" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                              <ComboBox fx:id="cmbSicComments" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                <ComboBox fx:id="cmbSicName" prefWidth="420.0" GridPane.columnIndex="1" />
+                                                          </children>
+                                                      </GridPane>
+                                                  </children>
+                                              </VBox>
+                                       <VBox alignment="CENTER_LEFT" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+                                    </children>
+                                 </HBox>
+                                 <VBox VBox.vgrow="ALWAYS" />
+                                 <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                    <children>
+                                       <CheckBox fx:id="chkOverrideCrew" mnemonicParsing="false" text="%CheckBoxOverrideCrew">
+                                          <font>
+                                             <Font size="18.0" />
+                                          </font>
+                                       </CheckBox>
+                                       <Button mnemonicParsing="false" onAction="#btnBackCrewAction" prefWidth="120.0" text="Back" />
+                                       <Button mnemonicParsing="false" onAction="#btnFinishAction" prefWidth="120.0" text="Finish" />
+                                    </children>
+                                 </HBox>
+                              </children>
+                           </VBox>
+                              </AnchorPane>
+                          </content>
+                      </Tab>
+                  </tabs>
+              </TabPane>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="736.0">
+               <children>
+                  <TextArea fx:id="txtWarning" wrapText="true" HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#btnCancelAction" prefWidth="120.0" text="%ButtonCancel">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

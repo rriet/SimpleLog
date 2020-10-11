@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Reports>
+	<template id="001">
+		<numberOfLines>26</numberOfLines>
+		<fileNameString>easaA4</fileNameString>
+		<descriptionString>Easa A4</descriptionString>
+	</template>
+	<template id="001">
+		<numberOfLines>26</numberOfLines>
+		<fileNameString>easaLetter</fileNameString>
+		<descriptionString>Easa Letter</descriptionString>
+	</template>
+</Reports>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.rietcorrea.controls.IntegerTextField?>
+<?import com.rietcorrea.controls.TimeField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="645.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rietcorrea.simplelog.PreferencesController">
+   <children>
+      <VBox layoutX="222.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="%LabelTotalInitalHour">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <GridPane style="-fx-border-color: black; -fx-background-color: f7f8f8;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="60.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="60.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="60.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="60.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="60.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="TOP_RIGHT" prefWidth="60.0" text="%LabelSectors" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <IntegerTextField fx:id="txtSectors" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label alignment="TOP_RIGHT" prefWidth="60.0" text="%LabelFlightDay" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <IntegerTextField fx:id="txtTakeoffDay" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Label text="%LabelFlightTakeOff" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                  <Label alignment="CENTER_RIGHT" prefWidth="60.0" text="%LabelFlightNight" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <IntegerTextField fx:id="txtTakeoffNight" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER_RIGHT" prefWidth="60.0" text="%LabelFlightDay" GridPane.columnIndex="8" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <IntegerTextField fx:id="txtLandingDay" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                  <Label text="%LabelFlightLanding" GridPane.columnIndex="8" GridPane.halignment="RIGHT" />
+                  <IntegerTextField fx:id="txtLandingNight" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" GridPane.columnIndex="11" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER_RIGHT" prefWidth="60.0" text="%LabelFlightNight" GridPane.columnIndex="10" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <Separator orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowSpan="2">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Separator>
+                  <Separator orientation="VERTICAL" GridPane.columnIndex="7" GridPane.rowSpan="2">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Separator>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </GridPane>
+            <GridPane minHeight="70.0" style="-fx-background-color: f7f8f8; -fx-border-color: black; -fx-border-width: 0 1 1 1;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER_RIGHT" text="%LabelFlightTotalTime" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourTotal" alignment="CENTER" prefHeight="27.0" prefWidth="120.0" GridPane.columnIndex="1" />
+                  <Label text="%LabelFlightNightTime" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourNight" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="3" />
+                  <Label text="%LabelFlightIfrTime" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourIfr" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="5" />
+                  <Label text="%LabelFlightCrossCountryTime" GridPane.columnIndex="6" GridPane.halignment="RIGHT">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourXc" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="7" />
+                  <Label fx:id="chkFstd" text="%LabelFlightSimulatorTime" GridPane.columnIndex="8" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TimeField fx:id="hourFstd" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="9" />
+                  <Label text="%LabelMel" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourMel" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="%LabelSel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourSel" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label text="%LabelMes" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourMes" alignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Label text="%LabelSes" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourSes" alignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Label text="%LabelMultiPilot" GridPane.columnIndex="8" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourMultiPilot" alignment="CENTER" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                  <Label text="%LabelFlightPicTime" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourPic" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="%LabelFlightPicusTime" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourPicus" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Label text="%LabelFlightSicTime" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourSic" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Label text="%LabelFlightDualTime" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <TimeField fx:id="hourDual" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <TimeField fx:id="hourInstructor" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                  <Label text="%LabelFlightInstructorTime" GridPane.columnIndex="8" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="%LabelFlightCalculationSettings" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-border-color: black; -fx-background-color: f7f8f8;">
+               <children>
+                  <Label text="%LabelCaclulateIfrHoursAs">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="cmbIfrPercentage" prefHeight="27.0" prefWidth="110.0" />
+                  <Label text="%LabelIfrMinus">
+                     <padding>
+                        <Insets left="10.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <IntegerTextField fx:id="txtIfrDeduction" prefHeight="27.0" prefWidth="50.0" />
+                  <Label text="%LabelIfrMinimum">
+                     <padding>
+                        <Insets left="10.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <IntegerTextField fx:id="txtIftMinimum" prefHeight="27.0" prefWidth="50.0" />
+                  <Label text="%LabelIfrMinutes">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="207.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="%LabelImportingFlightSettings" />
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="307.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: f7f8f8; -fx-border-color: Black;">
+               <children>
+                  <Label text="%LabelImportingCrossCountryWhen">
+                     <padding>
+                        <Insets left="10.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <IntegerTextField fx:id="txtNavigationLimit" prefHeight="27.0" prefWidth="50.0" />
+                  <Label text="%LabelImportNM">
+                     <padding>
+                        <Insets left="5.0" right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Label text="%LabelImportingDefaultPilotFuntion">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="cmbFunction" prefHeight="27.0" prefWidth="237.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="297.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="%LabelApplicationSettings" />
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="327.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: f7f8f8; -fx-border-color: Black;">
+               <children>
+                  <Label text="%LabelSettingsLanguage">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="cmbLanguage" onAction="#cbmLanguageAction" prefHeight="27.0" prefWidth="251.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></ComboBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <CheckBox fx:id="chkSubmitErrorLog" disable="true" mnemonicParsing="false" onAction="#chkSubmitErrorLogAction" text="%LabelSubmitAnonimousInformation">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></CheckBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

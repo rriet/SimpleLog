@@ -1,0 +1,210 @@
+
+
+
+
+<reportLine>
+    <aircraft>
+        <aircraftId>203</aircraftId>
+        <aircraftModel>
+            <efis>true</efis>
+            <engineType>Turbofan</engineType>
+            <modelGroup>B787</modelGroup>
+            <modelId>24</modelId>
+            <modelName>B788</modelName>
+            <mtow>227930</mtow>
+            <multiEngine>true</multiEngine>
+            <multiPilot>true</multiPilot>
+            <seaplane>false</seaplane>
+        </aircraftModel>
+        <aircraftMtow>227930</aircraftMtow>
+        <registration>A7-BCI</registration>
+        <simulator>false</simulator>
+    </aircraft>
+    <arrivalAirport>
+        <airportCity>Windhoek</airportCity>
+        <airportCountry>Namibia</airportCountry>
+        <airportId>237</airportId>
+        <airportName>Hosea Kutako International Airport</airportName>
+        <iata>WDH</iata>
+        <icao>FYWH</icao>
+        <latitude>-22.4799</latitude>
+        <latitudeString>S 22° 28.8</latitudeString>
+        <longitude>17.4709</longitude>
+        <longitudeString>E 017° 28.3</longitudeString>
+    </arrivalAirport>
+    <arrivalDate>1566550380</arrivalDate>
+    <crewPic>
+        <comments></comments>
+        <crewId>2</crewId>
+        <crew_name>Self</crew_name>
+        <email></email>
+        <phone></phone>
+    </crewPic>
+    <crewSic>
+        <comments></comments>
+        <crewId>653</crewId>
+        <crew_name>David Bruno</crew_name>
+        <email></email>
+        <phone></phone>
+    </crewSic>
+    <departureAirport>
+        <airportCity>Doha</airportCity>
+        <airportCountry>Qatar</airportCountry>
+        <airportId>133</airportId>
+        <airportName>Hamad International Airport</airportName>
+        <iata>DOH</iata>
+        <icao>OTHH</icao>
+        <latitude>25.273056</latitude>
+        <latitudeString>N 25° 16.4</latitudeString>
+        <longitude>51.608056</longitude>
+        <longitudeString>E 051° 36.5</longitudeString>
+    </departureAirport>
+    <departureDate>1566516540</departureDate>
+    <dualTime>0</dualTime>
+    <flightId>4074</flightId>
+    <fstdTime>0</fstdTime>
+    <ifrTime>534</ifrTime>
+    <instructorTime>0</instructorTime>
+    <landingDay>1</landingDay>
+    <landingNight>0</landingNight>
+    <nightTime>239</nightTime>
+    <pfPnf>PF</pfPnf>
+    <picTime>564</picTime>
+    <picUsTime>0</picUsTime>
+    <privateNotes></privateNotes>
+    <remarks>IRP: Victor Jose</remarks>
+    <sicTime>0</sicTime>
+    <takeOffDay>0</takeOffDay>
+    <takeOffNight>1</takeOffNight>
+    <totalTime>564</totalTime>
+    <xcTime>564</xcTime>
+    <arrivalTimeString>08:53</arrivalTimeString>
+    <departureDateString>22/08/2019</departureDateString>
+    <departureTimeString>23:29</departureTimeString>
+    <dualTimeString></dualTimeString>
+    <fstdTimeString></fstdTimeString>
+    <ifrTimeString>8:54</ifrTimeString>
+    <instructorTimeString></instructorTimeString>
+    <landingDayString>1</landingDayString>
+    <landingNightString></landingNightString>
+    <melTimeString></melTimeString>
+    <mesTimeString></mesTimeString>
+    <multiPilotTimeString>9:24</multiPilotTimeString>
+    <nightTimeString>3:59</nightTimeString>
+    <picTimeString>9:24</picTimeString>
+    <picusTimeString></picusTimeString>
+    <selTimeString></selTimeString>
+    <sesTimeString></sesTimeString>
+    <sicTimeString></sicTimeString>
+    <takeOffDayString></takeOffDayString>
+    <takeOffNightString>1</takeOffNightString>
+    <totalTimeString>9:24</totalTimeString>
+</reportLine>
+<totalsAfter>
+    <dualTime>5880</dualTime>
+    <fstdTime>19620</fstdTime>
+    <ifrTime>677625</ifrTime>
+    <instructorTime>20185</instructorTime>
+    <landingDay>2280</landingDay>
+    <landingNight>1163</landingNight>
+    <mel>1116</mel>
+    <mes>0</mes>
+    <multiPilot>740377</multiPilot>
+    <nightTime>348824</nightTime>
+    <picTime>344085</picTime>
+    <picUsTime>3679</picUsTime>
+    <sectors>4074</sectors>
+    <sel>9996</sel>
+    <ses>0</ses>
+    <sicTime>397125</sicTime>
+    <takeOffDay>2340</takeOffDay>
+    <takeOffNight>1111</takeOffNight>
+    <totalTime>751489</totalTime>
+    <xcTime>745926</xcTime>
+    <dualTimeString>98:00</dualTimeString>
+    <fstdTimeString>327:00</fstdTimeString>
+    <ifrTimeString>11,293:45</ifrTimeString>
+    <instructorTimeString>336:25</instructorTimeString>
+    <melTimeString>18:36</melTimeString>
+    <mesTimeString></mesTimeString>
+    <multiPilotTimeString>12,339:37</multiPilotTimeString>
+    <nightTimeString>5,813:44</nightTimeString>
+    <picTimeString>5,734:45</picTimeString>
+    <picusTimeString>61:19</picusTimeString>
+    <selTimeString>166:36</selTimeString>
+    <sesTimeString></sesTimeString>
+    <sicTimeString>6,618:45</sicTimeString>
+    <totalTimeString>12,524:49</totalTimeString>
+</totalsAfter>
+<totalsBefore>
+    <dualTime>5880</dualTime>
+    <fstdTime>19500</fstdTime>
+    <ifrTime>667730</ifrTime>
+    <instructorTime>20185</instructorTime>
+    <landingDay>2271</landingDay>
+    <landingNight>1159</landingNight>
+    <mel>1116</mel>
+    <mes>0</mes>
+    <multiPilot>729732</multiPilot>
+    <nightTime>345545</nightTime>
+    <picTime>333440</picTime>
+    <picUsTime>3679</picUsTime>
+    <sectors>4048</sectors>
+    <sel>9996</sel>
+    <ses>0</ses>
+    <sicTime>397125</sicTime>
+    <takeOffDay>2330</takeOffDay>
+    <takeOffNight>1107</takeOffNight>
+    <totalTime>740844</totalTime>
+    <xcTime>735281</xcTime>
+    <dualTimeString>98:00</dualTimeString>
+    <fstdTimeString>325:00</fstdTimeString>
+    <ifrTimeString>11,128:50</ifrTimeString>
+    <instructorTimeString>336:25</instructorTimeString>
+    <melTimeString>18:36</melTimeString>
+    <mesTimeString></mesTimeString>
+    <multiPilotTimeString>12,162:12</multiPilotTimeString>
+    <nightTimeString>5,759:05</nightTimeString>
+    <picTimeString>5,557:20</picTimeString>
+    <picusTimeString>61:19</picusTimeString>
+    <selTimeString>166:36</selTimeString>
+    <sesTimeString></sesTimeString>
+    <sicTimeString>6,618:45</sicTimeString>
+    <totalTimeString>12,347:24</totalTimeString>
+</totalsBefore>
+<totalsPage>
+    <dualTime>0</dualTime>
+    <fstdTime>120</fstdTime>
+    <ifrTime>9895</ifrTime>
+    <instructorTime>0</instructorTime>
+    <landingDay>9</landingDay>
+    <landingNight>4</landingNight>
+    <mel>0</mel>
+    <mes>0</mes>
+    <multiPilot>10645</multiPilot>
+    <nightTime>3279</nightTime>
+    <picTime>10645</picTime>
+    <picUsTime>0</picUsTime>
+    <sectors>26</sectors>
+    <sel>0</sel>
+    <ses>0</ses>
+    <sicTime>0</sicTime>
+    <takeOffDay>10</takeOffDay>
+    <takeOffNight>4</takeOffNight>
+    <totalTime>10645</totalTime>
+    <xcTime>10645</xcTime>
+    <dualTimeString></dualTimeString>
+    <fstdTimeString>2:00</fstdTimeString>
+    <ifrTimeString>164:55</ifrTimeString>
+    <instructorTimeString></instructorTimeString>
+    <melTimeString></melTimeString>
+    <mesTimeString></mesTimeString>
+    <multiPilotTimeString>177:25</multiPilotTimeString>
+    <nightTimeString>54:39</nightTimeString>
+    <picTimeString>177:25</picTimeString>
+    <picusTimeString></picusTimeString>
+    <selTimeString></selTimeString>
+    <sesTimeString></sesTimeString>
+    <sicTimeString></sicTimeString>
+    <totalTimeString>177:25</totalTimeString>
+</totalsPage>

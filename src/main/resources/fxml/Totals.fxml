@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.rietcorrea.controls.AdvancedDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rietcorrea.simplelog.TotalsController">
+   <children>
+      <VBox layoutX="222.0" layoutY="41.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <ComboBox fx:id="cmbSelection" prefWidth="250.0" HBox.hgrow="ALWAYS" />
+                  <Label text="%LabelFlightSearchStartDate" />
+                  <AdvancedDatePicker fx:id="dateStart" />
+                  <Label text="%LabelFlightSearchEndDate" />
+                  <AdvancedDatePicker fx:id="dateEnd" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <TableView fx:id="tableTotals" layoutX="100.0" layoutY="-16.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="colTitle" editable="false" minWidth="70.0" prefWidth="70.0" text="%ColumnTotalsTitle" />
+                        <TableColumn fx:id="colSectors" editable="false" minWidth="1.0" prefWidth="1.0" style="-fx-alignment: CENTER_RIGHT;" text="%ColumnTotalsSectors" />
+                        <TableColumn fx:id="colLandings" editable="false" prefWidth="75.0" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsLandings" />
+                      <TableColumn fx:id="colPic" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsPic" />
+                        <TableColumn fx:id="colPicus" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsPicus" />
+                        <TableColumn fx:id="colSic" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsSic" />
+                        <TableColumn fx:id="colDual" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsDual" />
+                        <TableColumn fx:id="colInstructor" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsInstructor" />
+                        <TableColumn fx:id="colXc" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsXc" />
+                        <TableColumn fx:id="colIfr" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsIfr" />
+                        <TableColumn fx:id="colNight" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsNight" />
+                        <TableColumn fx:id="colTotal" editable="false" prefWidth="75.0" sortable="false" style="-fx-alignment: CENTER-RIGHT;" text="%ColumnTotalsTotal" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
