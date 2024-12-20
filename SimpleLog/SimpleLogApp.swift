@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct SimpleLogApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
+        let schema:Schema = Schema([
             Item.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -25,7 +25,7 @@ struct SimpleLogApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
         .modelContainer(sharedModelContainer)
     }
