@@ -18,18 +18,28 @@ struct LogbookView: View {
         SelectedView(
             title: "Logbook",
             addEditView: AnyView(FlightEditView(teste: $teste)),
-            mainView: AnyView(mainView(teste: $teste)))
+            displayAddButton: true,
+            mainView: AnyView(MainLogbookView(teste: $teste)))
     }
 }
 
-struct mainView: View {
+struct MainLogbookView: View {
     
     @Binding var teste:String
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Text("teste - \(teste)")
             .padding(.all)
             .background(Color.gray)
+            .onDisappear(perform: {
+//                if presentationMode.wrappedValue.isPresented {
+//                        print("View was hidden")
+//                    } else {
+//                        print("View unloaded")
+//                    }
+            })
     }
     
 }

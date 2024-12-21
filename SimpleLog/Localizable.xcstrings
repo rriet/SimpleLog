@@ -16,6 +16,9 @@
     "Dismiss" : {
 
     },
+    "Hi" : {
+
+    },
     "iPad Edit - %@" : {
 
     },
@@ -25,13 +28,16 @@
     "Logbook" : {
 
     },
+    "Menu" : {
+
+    },
     "Reports" : {
 
     },
     "Settings" : {
 
     },
-    "SimpleLog" : {
+    "SimpleLog  %@" : {
 
     },
     "Summary" : {

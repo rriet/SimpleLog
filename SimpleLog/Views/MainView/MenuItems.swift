@@ -8,7 +8,16 @@
 import Foundation
 import SwiftUICore
 
-struct NavigationItem: Identifiable {
+struct NavigationItem: Identifiable, Hashable {
+    static func == (lhs: NavigationItem, rhs: NavigationItem) -> Bool {
+        lhs.label == rhs.label
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    
     let id = UUID()
     let label: String
     let icon: String
@@ -27,20 +36,20 @@ struct Menu {
 
 func MenuItems() -> Menu {
     let mainMenu:[NavigationItem] = [
-        NavigationItem(label: "Logbook", icon: "book.fill", destination: AnyView(LogbookView())),
-        NavigationItem(label: "Aircrafts", icon: "airplane", destination: AnyView(AircraftsView())),
-        NavigationItem(label: "Airports", icon: "mappin.circle", destination: AnyView(AirportsView())),
-        NavigationItem(label: "Crew", icon: "person.crop.circle", destination: AnyView(CrewView()))
+        NavigationItem(label: "Logbook", icon: "📒", destination: AnyView(LogbookView())),
+        NavigationItem(label: "Aircrafts", icon: "✈️", destination: AnyView(AircraftsView())),
+        NavigationItem(label: "Airports", icon: "📍", destination: AnyView(AirportsView())),
+        NavigationItem(label: "Crew", icon: "👨🏼‍✈️", destination: AnyView(CrewView()))
     ]
     
     let reportMenu:[NavigationItem] = [
-        NavigationItem(label: "Summary", icon: "sum", destination: AnyView(SummaryView())),
-        NavigationItem(label: "Reports", icon: "chart.dots.scatter", destination: AnyView(ReportsView()))
+        NavigationItem(label: "Summary", icon: "📄", destination: AnyView(SummaryView())),
+        NavigationItem(label: "Reports", icon: "🖨️", destination: AnyView(ReportsView()))
     ]
     
     let systemMenu:[NavigationItem] = [
-        NavigationItem(label: "Settings", icon: "gear", destination: AnyView(SettingsView())),
-        NavigationItem(label: "About", icon: "info.circle", destination: AnyView(AboutView()))
+        NavigationItem(label: "Settings", icon: "⚙️", destination: AnyView(SettingsView())),
+        NavigationItem(label: "About", icon: "💡", destination: AnyView(AboutView()))
     ]
     
     let menu = Menu(

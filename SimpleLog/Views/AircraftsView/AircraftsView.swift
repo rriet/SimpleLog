@@ -11,6 +11,15 @@ import SwiftData
 struct AircraftsView: View {
     
     var body: some View {
-        SelectedView(title: "Aircrafts")
+        SelectedView(title: "Aircrafts",
+                     addEditView: AnyView(AircraftEditView()),
+                     displayAddButton: true,
+                     mainView: AnyView(MainAircraftView()))
+    }
+}
+
+struct MainAircraftView: View {
+    var body: some View {
+        Text("Hi")
     }
 }
