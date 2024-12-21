@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "About" : {
 
     },
@@ -13,10 +16,10 @@
     "Dismiss" : {
 
     },
-    "iPad Edit" : {
+    "iPad Edit - %@" : {
 
     },
-    "iPhone Edit" : {
+    "iPhone Edit - %@" : {
 
     },
     "Logbook" : {
@@ -32,6 +35,12 @@
 
     },
     "Summary" : {
+
+    },
+    "teste" : {
+
+    },
+    "teste - %@" : {
 
     }
   },

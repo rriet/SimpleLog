@@ -11,12 +11,14 @@ import SwiftData
 struct FlightEditView: View {
     @State private var showAlert = false
     
+    @Binding var teste:String
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ViewThatFits {
-            viewiPad()
-            viewiPhone()
+            viewiPad(teste: $teste)
+            viewiPhone(teste: $teste)
         }
         
     }
@@ -27,30 +29,38 @@ struct FlightEditView: View {
 }
 
 struct viewiPad: View {
+    
+    @Binding var teste:String
+    
     @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
-            Text("iPad Edit")
+            Text("iPad Edit - \(teste)")
             Button("Dismiss", action: close)
         }
         .frame( width: CGFloat(500))
     }
     func close() {
+        teste = "Funciona!!!"
         dismiss()
     }
 }
 
 struct viewiPhone: View {
+    
+    @Binding var teste:String
+    
     @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
-            Text("iPhone Edit")
+            Text("iPhone Edit - \(teste)")
             Button("Dismiss", action: close)
 
         }
         .frame( width: CGFloat(200))
     }
     func close() {
+        teste = "Funciona!!!"
         dismiss()
     }
 }

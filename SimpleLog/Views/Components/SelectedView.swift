@@ -10,23 +10,27 @@ import SwiftUI
 struct SelectedView: View {
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
-    @State private var showFlight = false
     let title: String
     
+    @State private var showAddEdit = false
+    @State var addEditView: AnyView?
+    
+    @State var mainView: AnyView?
     
     var body: some View {
         ScrollView {
-            Text(title)
+            mainView
         }
 #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
 #endif
         .navigationTitle(title)
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                HStack{
+            if let newView = addEditView {
+                ToolbarItem(placement: .primaryAction) {
+                
                     Button(action: {
-                        showFlight.toggle()
+                        showAddEdit.toggle()
                     }) {
                         Image(systemName: "plus.app")
                             .font(.title2)
@@ -34,16 +38,15 @@ struct SelectedView: View {
                             .padding(.all)
                     }
 #if os(iOS)
-                        .fullScreenCover(isPresented: $showFlight, content: {
-                            FlightEditView()
+                        .fullScreenCover(isPresented: $showAddEdit, content: {
+                            newView
                         })
 #else
-                        .sheet(isPresented: $showFlight) {
-                            FlightEditView()
+                        .sheet(isPresented: $showAddEdit) {
+                            newView
                         }
 #endif
                 }
-                
             }
         }
     }
@@ -52,3 +55,5 @@ struct SelectedView: View {
 #Preview {
     SelectedView(title: "Title")
 }
+
+
