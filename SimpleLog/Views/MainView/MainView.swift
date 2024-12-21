@@ -10,7 +10,6 @@ import SwiftUI
 struct MainView: View {
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .automatic
-    @State private var preferredColumn = NavigationSplitViewColumn.detail
     @State var selected:String?
     
     // Get menu items
@@ -20,7 +19,7 @@ struct MainView: View {
     
     var body: some View {
         
-        NavigationSplitView(columnVisibility: $columnVisibility, preferredCompactColumn: $preferredColumn) {
+        NavigationSplitView(columnVisibility: $columnVisibility) {
             List (selection: $selected){
                 ForEach(menu.SectionItems) { section in
                      Section(header: Text(section.sectionName)) {

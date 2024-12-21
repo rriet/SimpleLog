@@ -19,25 +19,10 @@ struct SelectedView: View {
             Text(title)
         }
 #if os(iOS)
-        .navigationBarBackButtonHidden(UIDevice.current.userInterfaceIdiom == .phone)
         .navigationBarTitleDisplayMode(.inline)
 #endif
         .navigationTitle(title)
         .toolbar {
-#if os(iOS)
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "house")
-                            .fontWeight(.bold)
-                            .padding(.all)
-                    }
-                }
-            }
-#endif
-            
             ToolbarItem(placement: .primaryAction) {
                 HStack{
                     Button(action: {
