@@ -13,60 +13,54 @@ struct MainView: View {
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .automatic
     @State private var preferredColumn = NavigationSplitViewColumn.detail
-    @State var selected:String?
     
-    @State var test:String = "A"
+    @State var selectedMenuItem = "Logbook"
+    @State var selectedView = AnyView(LogbookView())
     
     // Get menu items
     let menu = MenuItems()
     
     // MARK: Main View
-    
     var body: some View {
-        
         NavigationSplitView(columnVisibility: $columnVisibility, preferredCompactColumn: $preferredColumn) {
-            
             VStack {
-                Text("SimpleLog  \(test)")
+                Text("SimpleLog")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.top)
-                List {
-                    ForEach(menu.SectionItems) { section in
-                        Section(header: Text(section.sectionName)) {
-                            ForEach(section.items) { item in
-//                                NavigationLink(destination: item.destination) {
-//                                    HStack {
-//                                        Text(item.icon)
-//                                            .font(.title2)
-//                                            .padding(.horizontal)
-//                                        Text(item.label)
-//                                            .fontWeight(.bold)
-//                                            .font(.title3)
-//                                    }
-//                                }
-                                NavigationLink(value: item) {
+//                List {
+                    ForEach(menu, id: \.0) { (section, items) in
+//                        Section(header: Text(section)) {
+                        Text(section)
+                            .fontWeight(.bold)
+                            .padding(.top)
+                            ForEach(items) { item in
+                                Button {
+                                    selectedMenuItem = item.label
+                                    selectedView = item.destination
+                                    preferredColumn = .detail
+                                } label: {
                                     HStack {
                                         Text(item.icon)
                                             .font(.title2)
-                                            .padding(.horizontal)
+//                                            .padding(.horizontal)
+                                            .padding(EdgeInsets(top: 3, leading: 10, bottom: 3, trailing: 10))
                                         Text(item.label)
-                                            .fontWeight(.bold)
+                                            .fontWeight(selectedMenuItem == item.label ? .black : .light)
+                                            .animation(.easeIn)
                                             .font(.title3)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
                                     }
                                 }
+                                .buttonStyle(.bordered)
                             }
-                        }
+                        
                     }
-                }
-                .navigationDestination(for: NavigationItem.self) { navigationItem in
-                    navigationItem.destination
-                }
-                    .onAppear(perform: {
-                        print("Teste")
-                    })
-                    .listStyle(.inset)
+//                }
+                .listStyle(.sidebar)
             }
+            .padding(.all)
+            .frame(maxHeight: .infinity, alignment: .top)
                 .background(.background)
 #if os(macOS)
                 .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 200)
@@ -76,30 +70,24 @@ struct MainView: View {
 #endif
         
         } detail: {
-            LogbookView()
+            selectedView
         }
 #if os(iOS)
-//        .onChange(of: selected) {
-//            test = "Teste"
-//            closeIpadMenu()
-//        }
-#endif
-    }
-    
-    // MARK: Auxiliar Functions
-
-#if os(iOS)
-    /// Closes the iPad menu if the tablet is in Portrait
-    func closeIpadMenu() {
-        test = "Teste"
-        // Close the sidebar in iPad on portrait mode
-        if UIDevice.current.userInterfaceIdiom == .pad,
-           UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height {
-            columnVisibility = .detailOnly
+        /// Closes the iPad menu if the tablet is in Portrait
+        .onChange(of: selectedMenuItem) {
+            if UIDevice.current.userInterfaceIdiom == .pad,
+               UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height {
+                columnVisibility = .detailOnly
+            }
         }
-    }
+        .onChange(of: UIScreen.main.bounds.size.width) {
+            if UIDevice.current.userInterfaceIdiom == .pad,
+               UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height {
+                columnVisibility = .automatic
+            }
+        }
 #endif
-    
+    }
 } // End of struct
 
 #Preview("Light") {

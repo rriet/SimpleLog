@@ -8,60 +8,26 @@
 import Foundation
 import SwiftUICore
 
-struct NavigationItem: Identifiable, Hashable {
-    static func == (lhs: NavigationItem, rhs: NavigationItem) -> Bool {
-        lhs.label == rhs.label
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    
+struct NavigationItem: Identifiable {
     let id = UUID()
+    let sectionName: String
     let label: String
     let icon: String
     let destination: AnyView
 }
 
-struct SectionItem: Identifiable {
-    let id = UUID()
-    let sectionName: String
-    let items: [NavigationItem]
-}
-
-struct Menu {
-    var SectionItems: [SectionItem]
-}
-
-func MenuItems() -> Menu {
+func MenuItems() -> [(String, [NavigationItem])] {
     let mainMenu:[NavigationItem] = [
-        NavigationItem(label: "Logbook", icon: "📒", destination: AnyView(LogbookView())),
-        NavigationItem(label: "Aircrafts", icon: "✈️", destination: AnyView(AircraftsView())),
-        NavigationItem(label: "Airports", icon: "📍", destination: AnyView(AirportsView())),
-        NavigationItem(label: "Crew", icon: "👨🏼‍✈️", destination: AnyView(CrewView()))
+        NavigationItem(sectionName: "", label: "Logbook", icon: "📒", destination: AnyView(LogbookView())),
+        NavigationItem(sectionName: "",label: "Aircrafts", icon: "✈️", destination: AnyView(AircraftsView())),
+        NavigationItem(sectionName: "",label: "Airports", icon: "📍", destination: AnyView(AirportsView())),
+        NavigationItem(sectionName: "",label: "Crew", icon: "👨🏼‍✈️", destination: AnyView(CrewView())),
+        NavigationItem(sectionName: "Reports",label: "Summary", icon: "📄", destination: AnyView(SummaryView())),
+        NavigationItem(sectionName: "Reports",label: "Reports", icon: "🖨️", destination: AnyView(ReportsView())),
+        NavigationItem(sectionName: "System",label: "Settings", icon: "⚙️", destination: AnyView(SettingsView())),
+        NavigationItem(sectionName: "System",label: "About", icon: "💡", destination: AnyView(AboutView()))
     ]
     
-    let reportMenu:[NavigationItem] = [
-        NavigationItem(label: "Summary", icon: "📄", destination: AnyView(SummaryView())),
-        NavigationItem(label: "Reports", icon: "🖨️", destination: AnyView(ReportsView()))
-    ]
-    
-    let systemMenu:[NavigationItem] = [
-        NavigationItem(label: "Settings", icon: "⚙️", destination: AnyView(SettingsView())),
-        NavigationItem(label: "About", icon: "💡", destination: AnyView(AboutView()))
-    ]
-    
-    let menu = Menu(
-        SectionItems:[
-            SectionItem(sectionName:"",
-                items: mainMenu),
-            SectionItem(sectionName:"Reports",
-                items:reportMenu),
-            SectionItem(sectionName:"System",
-                items:systemMenu)
-        ]
-    )
-    
-    return menu
+    let grouped = Dictionary(grouping: mainMenu, by: { $0.sectionName })
+    return grouped.sorted(by: { $0.key < $1.key })
 }

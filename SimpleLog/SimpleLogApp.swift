@@ -10,9 +10,24 @@ import SwiftData
 
 @main
 struct SimpleLogApp: App {
+    
+#if os(macOS)
+    // Remove the "View" "Tab" menu
+    fileprivate func disallowTabbingMode() {
+        NSWindow.allowsAutomaticWindowTabbing = false
+    }
+    
+    init() {
+        disallowTabbingMode()
+    }
+#endif
+    
+    // SwiftData initialization
     var sharedModelContainer: ModelContainer = {
         let schema:Schema = Schema([
-            Item.self,
+            AirportModel.self,
+            DutyPeriodModel.self,
+            FlightModel.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -22,11 +37,19 @@ struct SimpleLogApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
+    
     var body: some Scene {
         WindowGroup {
             MainView()
         }
         .modelContainer(sharedModelContainer)
+#if os(macOS)
+        // Modify menus on MacOS
+        .commands {
+            CommandGroup(replacing: CommandGroupPlacement.newItem) {}
+            CommandGroup(replacing: CommandGroupPlacement.toolbar) {}
+            
+        }
+#endif
     }
 }
