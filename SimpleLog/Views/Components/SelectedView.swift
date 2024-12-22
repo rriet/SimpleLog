@@ -5,6 +5,15 @@
 //  Created by Ricardo Brito Riet Correa on 12/20/24.
 //
 
+
+// Screen Sizes
+/*
+    iPhone - 402 / 874
+    iPhone SE - 375 / 667
+    iPad Pro 11in - 834 / 1,210
+    iPad Mini - 744 / 1,133
+ */
+
 import SwiftUI
 
 struct SelectedView: View {
@@ -24,9 +33,7 @@ struct SelectedView: View {
     @State var mainView: AnyView?
     
     var body: some View {
-//        mainView
-        
-        Text("This is the main view")
+        mainView
         
         .navigationTitle(title)
         

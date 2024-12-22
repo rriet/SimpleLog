@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		89B78C342D18B221002F18C3 /* SimpleLog copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SimpleLog copy-Info.plist"; path = "/Users/riet/Programming/swift/SimpleLog/SimpleLog copy-Info.plist"; sourceTree = "<absolute>"; };
 		89D88A572D14A12D001B8505 /* SimpleLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -46,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				89D88A592D14A12D001B8505 /* SimpleLog */,
+				89B78C342D18B221002F18C3 /* SimpleLog copy-Info.plist */,
 				89D88A582D14A12D001B8505 /* Products */,
 			);
 			sourceTree = "<group>";

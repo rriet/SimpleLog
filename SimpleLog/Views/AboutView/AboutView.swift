@@ -14,41 +14,83 @@ struct AboutView: View {
     var body: some View {
         VStack {
             Text("About")
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: .infinity
+                )
         }
         .navigationTitle("About")
-        
-        // This doesn't exist in MacOS
 #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
 #endif
-        .toolbar {
-        // "Add new" icon - Only display if there is a view passed to this Struct
-            ToolbarItem(placement: .primaryAction) {
-                
-                Button(action: {
-                    showAddEdit.toggle()
-                }) {
-                    Image(systemName: "plus.app")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.all)
-                }
-                
-                // fullScreenCover only works on IOS
-#if os(iOS)
-                .fullScreenCover(isPresented: $showAddEdit, content: {
-                    FlightEditView()
-                })
-#else
-                // sheet works on all systems, but is dismissible on IOS, not dismissible on MacOS
-                .sheet(isPresented: $showAddEdit) {
-                    FlightEditView()
-                }
-#endif
+        .floatingButton(
+            buttonContent: AnyView(
+                Image(systemName: "plus")
+                    .foregroundColor(.white)
+                    .font(.title)
+            ),
+            action: {
+                showAddEdit.toggle()
+                print("Floating button pressed!")
             }
+        )
+#if os(iOS)
+        .fullScreenCover(isPresented: $showAddEdit, content: {
+            FlightEditView()
+        })
+#else
+        // sheet works on all systems, but is dismissible on IOS, not dismissible on MacOS
+        .sheet(isPresented: $showAddEdit) {
+            FlightEditView()
+        }
+#endif
+    }
+}
+
+
+
+extension View {
+    func floatingButton(
+        buttonContent: AnyView,
+        action: @escaping () -> Void
+    ) -> some View {
+        self.modifier(FloatingButtonModifier(buttonContent: buttonContent, action: action))
+    }
+}
+
+
+struct FloatingButtonModifier: ViewModifier {
+    var buttonContent: AnyView
+    var action: () -> Void
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            content // The original view being modified
+            
+            VStack {
+                Spacer() // Push to the bottom
+                HStack {
+                    Spacer() // Push to the right
+                    Button(action: {
+                        action()
+                    }) {
+                        buttonContent
+                    }
+                    .padding()
+                    .background(Circle().fill(Color.blue))
+                    .foregroundColor(.white)
+                    .shadow(radius: 4)
+                }
+            }
+            .padding()
         }
     }
 }
+
+
+
+
+
 
 #Preview("Light") {
     AboutView()

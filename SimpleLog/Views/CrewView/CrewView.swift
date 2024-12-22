@@ -9,21 +9,56 @@ import SwiftUI
 import SwiftData
 
 struct CrewView: View {
-    @State private var showAlert = false
+    @State private var showAddEdit = false
     
     var body: some View {
-        VStack {
-            Text("Crew")
-        }
-        .navigationTitle("Crew")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    
-                }) {
-                    Image(systemName: "plus")
+        ZStack {
+            VStack{
+                Button("Open") {
+                    showAddEdit.toggle()
                 }
+                
+                Text("Crew")
             }
+            VStack {
+                HStack {
+                    Button(action: {
+                        showAddEdit.toggle()
+                    }) {
+                        Image(systemName: "plus")
+                            .font(.title)
+                            .fontWeight(.bold)
+                    }
+                    .padding(.all, 15)
+                    .background(Circle().fill(Color.accentColor))
+                    .foregroundColor(.white)
+                    .shadow(radius: 4)
+                }
+                .padding(.horizontal, 20)
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: .infinity,
+                    alignment: .bottomTrailing
+                )
+            }
+            .padding()
         }
+        
+        .navigationTitle("Crew")
+#if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        .fullScreenCover(isPresented: $showAddEdit, content: {
+            CrewEditView()
+        })
+#else
+        // sheet works on all systems, but is dismissible on IOS, not dismissible on MacOS
+        .sheet(isPresented: $showAddEdit) {
+            CrewEditView()
+        }
+#endif
     }
+}
+
+#Preview("Light") {
+    CrewView()
 }

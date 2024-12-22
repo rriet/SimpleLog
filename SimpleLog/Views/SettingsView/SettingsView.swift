@@ -12,17 +12,24 @@ struct SettingsView: View {
     @State private var showAlert = false
     
     var body: some View {
-        VStack {
-            Text("Settings")
-        }
-        .navigationTitle("Settings")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                }) {
-                    Image(systemName: "plus")
-                }
+        ViewThatFits {
+            HStack {
+                CrewView()
+                AboutView()
             }
+            .frame(minWidth: 800)
+            VStack {
+                Text("Smal Display")
+                AboutView()
+            }
+            
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.red)
     }
+}
+
+
+#Preview("Light") {
+    SettingsView()
 }

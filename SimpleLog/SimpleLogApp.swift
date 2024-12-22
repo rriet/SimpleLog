@@ -31,7 +31,6 @@ struct SimpleLogApp: App {
             MainView()
         }
         .modelContainer(sharedModelContainer)
-        
 #if os(macOS)
         // Modify System menus on top bar of MacOS
         .commands {

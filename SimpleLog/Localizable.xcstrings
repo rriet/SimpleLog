@@ -22,10 +22,29 @@
     "Dismiss" : {
 
     },
+    "Dismiss Window" : {
+
+    },
     "Duty End: %lld" : {
 
     },
     "Duty Start: %lld" : {
+
+    },
+    "End Time: %lld" : {
+
+    },
+    "Flight from %@ to %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flight from %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "Flight Time: %lld minutes" : {
 
     },
     "Flight: %@ to %@" : {
@@ -48,13 +67,10 @@
         }
       }
     },
-    "Hi" : {
+    "iPad Edit" : {
 
     },
-    "iPad Edit - %@" : {
-
-    },
-    "iPhone Edit - %@" : {
+    "iPhone Edit" : {
 
     },
     "Logbook" : {
@@ -63,7 +79,10 @@
     "Menu" : {
 
     },
-    "Read Data" : {
+    "Open" : {
+
+    },
+    "Print Data Count" : {
 
     },
     "Reports" : {
@@ -75,10 +94,16 @@
     "SimpleLog" : {
 
     },
+    "Smal Display" : {
+
+    },
+    "Start Time: %lld" : {
+
+    },
     "Summary" : {
 
     },
-    "teste" : {
+    "Total Duty Time: %lld minutes" : {
 
     }
   },
