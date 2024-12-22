@@ -16,6 +16,14 @@ class AirportModel: Identifiable {
     var latitude: Double
     var longitude: Double
     
+    // Add a relationship to flights Deperture
+    @Relationship(deleteRule: .deny, inverse: \FlightModel.departurePlace)
+    var departureFlights: [FlightModel] = []
+    
+    // Add a relationship to flights Arrival
+    @Relationship(deleteRule: .deny, inverse: \FlightModel.arrivalPlace)
+    var arrivalFlights: [FlightModel] = []
+    
     init(ICAO: String = "", name: String = "", latitude: Double = 0.00, longitude: Double = 0.00) {
         self.id = UUID()
         self.ICAO = ICAO

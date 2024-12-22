@@ -7,6 +7,12 @@
     "About" : {
 
     },
+    "Add Data" : {
+
+    },
+    "Add Random Data" : {
+
+    },
     "Airports" : {
 
     },
@@ -15,6 +21,32 @@
     },
     "Dismiss" : {
 
+    },
+    "Duty End: %lld" : {
+
+    },
+    "Duty Start: %lld" : {
+
+    },
+    "Flight: %@ to %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flight: %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "Flight: %lld to %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flight: %1$lld to %2$@"
+          }
+        }
+      }
     },
     "Hi" : {
 
@@ -31,6 +63,9 @@
     "Menu" : {
 
     },
+    "Read Data" : {
+
+    },
     "Reports" : {
 
     },
@@ -44,9 +79,6 @@
 
     },
     "teste" : {
-
-    },
-    "teste - %@" : {
 
     }
   },

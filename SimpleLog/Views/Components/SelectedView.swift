@@ -9,8 +9,6 @@ import SwiftUI
 
 struct SelectedView: View {
     
-    
-    
     // The title to display in the toolbar
     let title: String
     
@@ -26,17 +24,16 @@ struct SelectedView: View {
     @State var mainView: AnyView?
     
     var body: some View {
-        ScrollView {
-            mainView
-        }
+//        mainView
+        
+        Text("This is the main view")
+        
         .navigationTitle(title)
         
         // This doesn't exist in MacOS
 #if os(iOS)
-        
         .navigationBarTitleDisplayMode(.inline)
 #endif
-        
         .toolbar {
             // "Add new" icon - Only display if there is a view passed to this Struct
 //            if let newView = addEditView {
@@ -68,9 +65,3 @@ struct SelectedView: View {
         }
     }
 }
-
-//#Preview {
-//    SelectedView(title: "Title")
-//}
-
-

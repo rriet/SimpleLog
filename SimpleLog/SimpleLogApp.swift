@@ -10,18 +10,6 @@ import SwiftData
 
 @main
 struct SimpleLogApp: App {
-    
-#if os(macOS)
-    // Remove the "View" "Tab" menu
-    fileprivate func disallowTabbingMode() {
-        NSWindow.allowsAutomaticWindowTabbing = false
-    }
-    
-    init() {
-        disallowTabbingMode()
-    }
-#endif
-    
     // SwiftData initialization
     var sharedModelContainer: ModelContainer = {
         let schema:Schema = Schema([
@@ -43,13 +31,27 @@ struct SimpleLogApp: App {
             MainView()
         }
         .modelContainer(sharedModelContainer)
+        
 #if os(macOS)
-        // Modify menus on MacOS
+        // Modify System menus on top bar of MacOS
         .commands {
+            // Remove New Menu
             CommandGroup(replacing: CommandGroupPlacement.newItem) {}
-            CommandGroup(replacing: CommandGroupPlacement.toolbar) {}
-            
         }
 #endif
     }
+    
+    
+#if os(macOS)
+    // Modify System menus on top bar of MacOS
+    
+    // Remove the "View" "Tab" menu
+    fileprivate func disallowTabbingMode() {
+        NSWindow.allowsAutomaticWindowTabbing = false
+    }
+    
+    init() {
+        disallowTabbingMode()
+    }
+#endif
 }
