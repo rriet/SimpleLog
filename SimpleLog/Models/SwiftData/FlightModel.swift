@@ -10,22 +10,21 @@ import SwiftData
 
 
 @Model
-class FlightModel: Schedulable {
-    var id: UUID
-    var startTime: Int
+class FlightModel {
+//    @Relationship(deleteRule: .noAction)
+    var startTime: TimeModel?
     var endTime: Int
     var departurePlace: AirportModel
     var arrivalPlace: AirportModel
     var flightTime: Int
     
     init(
-        startTime: Int = Int(Date().timeIntervalSince1970 / 60),
+        startTime: TimeModel = TimeModel(),
         endTime: Int = Int(Date().timeIntervalSince1970 / 60),
         departurePlace: AirportModel = AirportModel(),
         arrivalPlace: AirportModel = AirportModel(),
-        flightTime: Int) {
-        
-        self.id = UUID()
+        flightTime: Int = 0
+    ) {
         self.startTime = startTime
         self.endTime = endTime
         self.departurePlace = departurePlace

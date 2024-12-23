@@ -13,11 +13,27 @@
     "Add Random Data" : {
 
     },
+    "Add Random Flights" : {
+
+    },
     "Airports" : {
+
+    },
+    "Associated Duty: %@" : {
 
     },
     "Crew" : {
 
+    },
+    "Departure: %@ → Arrival: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Departure: %1$@ → Arrival: %2$@"
+          }
+        }
+      }
     },
     "Dismiss" : {
 
@@ -25,47 +41,8 @@
     "Dismiss Window" : {
 
     },
-    "Duty End: %lld" : {
+    "Flight Start Time: %lld" : {
 
-    },
-    "Duty Start: %lld" : {
-
-    },
-    "End Time: %lld" : {
-
-    },
-    "Flight from %@ to %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Flight from %1$@ to %2$@"
-          }
-        }
-      }
-    },
-    "Flight Time: %lld minutes" : {
-
-    },
-    "Flight: %@ to %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Flight: %1$@ to %2$@"
-          }
-        }
-      }
-    },
-    "Flight: %lld to %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Flight: %1$lld to %2$@"
-          }
-        }
-      }
     },
     "iPad Edit" : {
 
@@ -77,6 +54,9 @@
 
     },
     "Menu" : {
+
+    },
+    "Notes: %@" : {
 
     },
     "Open" : {
@@ -97,10 +77,10 @@
     "Smal Display" : {
 
     },
-    "Start Time: %lld" : {
+    "Summary" : {
 
     },
-    "Summary" : {
+    "Time: %lld" : {
 
     },
     "Total Duty Time: %lld minutes" : {

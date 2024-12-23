@@ -4,129 +4,90 @@
 //
 //  Created by Ricardo Brito Riet Correa on 12/19/24.
 //
-
 import SwiftUI
 import SwiftData
 
 struct LogbookView: View {
     @Environment(\.modelContext) private var modelContext
+    @Query var timeModels: [TimeModel]
+    
     @StateObject private var viewModel = LogbookViewModel()
     
-    @Query(sort: \FlightModel.startTime, order: .forward) var flights: [FlightModel]
-    @Query(sort: \DutyPeriodModel.startTime, order: .forward) var dutyPeriods: [DutyPeriodModel]
-    
     var body: some View {
-        VStack{
-            Button("Add Random Data") {
+        VStack {
+            Button("Add Random Flights") {
                 viewModel.addSampleData(context: modelContext)
             }
+            
             List {
-                // Combine and sort flights and duty periods lazily
-                ForEach(mergeAndSortEvents(), id: \.id) { event in
-                    Text(event.title)
+                ForEach(timeModels, id: \.id) { timeModel in
+                    Section(header: Text("Time: \(timeModel.timestamp)")) {
+                        // Check if there's an associated flight or duty
+                        if let flight = timeModel.flightsStartingHere.first {
+                            VStack(alignment: .leading) {
+                                Text(
+                                    "Flight Start Time: \(flight.startTime?.timestamp ?? 0)"
+                                )
+//                                Text("Flight End Time: \(flight.endTime)")
+                                Text("Departure: \(flight.departurePlace.name) → Arrival: \(flight.arrivalPlace.name)")
+                            }
+                        } else if let duty = timeModel.dutiesStartingHere.first {
+                            VStack(alignment: .leading) {
+//                                Text("Duty Start Time: \(duty.startTime.timestamp)")
+//                                Text("Duty End Time: \(duty.endTime.timestamp)")
+                                Text("Total Duty Time: \(duty.totalDutyTime) minutes")
+                                Text("Notes: \(duty.notes)")
+                            }
+                        } else if let dutyEnd = timeModel.dutiesEndingHere.first {
+                            // Handle Duty End times separately if necessary
+                            VStack(alignment: .leading) {
+//                                Text("Duty End Time: \(dutyEnd.endTime.timestamp)")
+                                Text("Associated Duty: \(dutyEnd.notes)")
+                            }
+                        }
+                    }
                 }
-                .onDelete { offsets in
-                    viewModel.deleteItems(at: offsets, flights: flights, dutyPeriods: dutyPeriods, context: modelContext)
+                .onDelete(perform: deleteTimeModels)
+            }
+        }
+    }
+
+    private func deleteTimeModels(at offsets: IndexSet) {
+        for index in offsets {
+            let timeModelToDelete = timeModels[index]
+            
+            // Check and delete associated flights
+            if let flight = timeModelToDelete.flightsStartingHere.first {
+                modelContext.delete(timeModelToDelete)
+                modelContext.delete(flight)
+            }
+            
+            // Check and delete associated duties starting here
+            else if let dutyStart = timeModelToDelete.dutiesStartingHere.first {
+                if let endTimeToDelete = dutyStart.endTime{
+                    modelContext.delete(timeModelToDelete)
+                    modelContext.delete(endTimeToDelete)
+                    modelContext.delete(dutyStart)
                 }
+            }
+            
+            // Check and delete associated duties ending here
+            else if let dutyEnd = timeModelToDelete.dutiesEndingHere.first {
+                if let startTimeToDelete = dutyEnd.startTime {
+                    modelContext.delete(startTimeToDelete)
+                    modelContext.delete(timeModelToDelete)
+                    modelContext.delete(dutyEnd)
+                }
+            }
+            
+            // Save changes to the context
+            do {
+                try modelContext.save()
+            } catch {
+                print("Error saving context after deletion: \(error)")
             }
         }
         
-    }
-    
-    private func mergeAndSortEvents() -> [SchedulableEvent] {
-        var events: [SchedulableEvent] = []
         
-        // Map flights to SchedulableEvents
-        events.append(contentsOf: flights.map { flight in
-            SchedulableEvent(
-                id: flight.id,
-                startTime: flight.startTime,
-                title: "Flight: \(flight.startTime) to \(flight.departurePlace.name)"
-            )
-        })
-        
-        // Map duty periods to SchedulableEvents
-        events.append(contentsOf: dutyPeriods.flatMap { duty in
-            [
-                SchedulableEvent(
-                    id: UUID(), // Unique ID for Duty Start
-                    startTime: duty.startTime,
-                    title: "Duty Start"
-                ),
-                SchedulableEvent(
-                    id: UUID(), // Unique ID for Duty End
-                    startTime: duty.endTime,
-                    title: "Duty End"
-                )
-            ]
-        })
-        
-        // Sort events by startTime
-        events.sort(by: { $0.startTime < $1.startTime })
-        
-        return events
     }
 }
-
-
-
-//import SwiftUI
-//import SwiftData
-//
-//struct LogbookView: View {
-//    @Environment(\.modelContext) private var modelContext
-//    
-//    // Use @Query for fetching data dynamically
-//    @Query private var flights: [FlightModel]
-//    @Query private var dutyPeriods: [DutyPeriodModel]
-//    
-//    @StateObject private var viewModel = LogbookViewModel()
-//    
-//    var allEvents: [SchedulableEvent] {
-//        var events: [SchedulableEvent] = []
-//        
-//        // Map flights into events
-//        events.append(contentsOf: flights.map {
-//            SchedulableEvent(
-//                id: $0.id,
-//                startTime: $0.startTime,
-//                title: "Flight: \(String($0.startTime)) to \(String($0.departurePlace.name))"
-//            )
-//        })
-//        
-//        // Map duty periods into separate start and end events
-//        for duty in dutyPeriods {
-//            events.append(SchedulableEvent(
-//                id: UUID(),
-//                startTime: duty.startTime,
-//                title: "Duty Start"
-//            ))
-//            events.append(SchedulableEvent(
-//                id: UUID(),
-//                startTime: duty.endTime,
-//                title: "Duty End"
-//            ))
-//        }
-//        
-//        // Sort all events by start time
-//        events.sort(by: { $0.startTime < $1.startTime })
-//        return events
-//    }
-//    
-//    var body: some View {
-//        VStack {
-//            Button("Add Random Data") {
-//                viewModel.addSampleData(context: modelContext)
-//            }
-//            
-//            List {
-//                ForEach(allEvents) { event in
-//                    Text(event.title)
-//                }
-//                .onDelete { offsets in
-//                    viewModel.deleteItems(at: offsets, flights: flights, dutyPeriods: dutyPeriods, context: modelContext)
-//                }
-//            }
-//        }
-//    }
-//}

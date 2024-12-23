@@ -84,7 +84,7 @@ struct viewiPhone: View {
         
         // Create random flights
         let flight1 = FlightModel(
-            startTime: Int(Date().timeIntervalSince1970 / 60),
+//            startTime: Int(Date().timeIntervalSince1970 / 60),
             endTime: Int(Date().timeIntervalSince1970 / 60) + 120,
             departurePlace: airport1,
             arrivalPlace: airport2,
@@ -92,7 +92,7 @@ struct viewiPhone: View {
         )
         
         let flight2 = FlightModel(
-            startTime: Int(Date().timeIntervalSince1970 / 60) + 180,
+//            startTime: Int(Date().timeIntervalSince1970 / 60) + 180,
             endTime: Int(Date().timeIntervalSince1970 / 60) + 300,
             departurePlace: airport2,
             arrivalPlace: airport1,
@@ -105,8 +105,8 @@ struct viewiPhone: View {
         
         // Create a random duty period
         let dutyPeriod = DutyPeriodModel(
-            startTime: Int(Date().timeIntervalSince1970 / 60),
-            endTime: Int(Date().timeIntervalSince1970 / 60) + 480,
+//            startTime: Int(Date().timeIntervalSince1970 / 60),
+//            endTime: Int(Date().timeIntervalSince1970 / 60) + 480,
             totalDutyTime: 480,
             notes: "Test Duty Period"
         )
