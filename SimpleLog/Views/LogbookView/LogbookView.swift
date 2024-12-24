@@ -20,28 +20,26 @@ struct LogbookView: View {
             }
             
             List {
-                ForEach(timeModels, id: \.id) { timeModel in
+                ForEach(timeModels) { timeModel in
                     Section(header: Text("Time: \(timeModel.timestamp)")) {
                         // Check if there's an associated flight or duty
-                        if let flight = timeModel.flightsStartingHere.first {
+                        if let flight = timeModel.flightsStartingHere {
                             VStack(alignment: .leading) {
-                                Text(
-                                    "Flight Start Time: \(flight.startTime?.timestamp ?? 0)"
-                                )
-//                                Text("Flight End Time: \(flight.endTime)")
-                                Text("Departure: \(flight.departurePlace.name) → Arrival: \(flight.arrivalPlace.name)")
+                                Text("Flight Start Time: \(flight.startTimeInt)")
+                                Text("Flight End Time: \(flight.endTime)")
+                                Text("Departure: \(flight.departurePlace?.name ?? "") → Arrival: \(flight.arrivalPlace?.name ?? "")")
                             }
-                        } else if let duty = timeModel.dutiesStartingHere.first {
+                        }else if let duty = timeModel.dutiesStartingHere {
                             VStack(alignment: .leading) {
-//                                Text("Duty Start Time: \(duty.startTime.timestamp)")
-//                                Text("Duty End Time: \(duty.endTime.timestamp)")
+                                Text("Duty Start Time: \(duty.startTime?.timestamp ?? 0)")
+                                Text("Duty End Time: \(duty.endTime?.timestamp ?? 0)")
                                 Text("Total Duty Time: \(duty.totalDutyTime) minutes")
                                 Text("Notes: \(duty.notes)")
                             }
-                        } else if let dutyEnd = timeModel.dutiesEndingHere.first {
+                        } else if let dutyEnd = timeModel.dutiesEndingHere {
                             // Handle Duty End times separately if necessary
                             VStack(alignment: .leading) {
-//                                Text("Duty End Time: \(dutyEnd.endTime.timestamp)")
+                                Text("Duty End Time: \(dutyEnd.endTime?.timestamp ?? 0)")
                                 Text("Associated Duty: \(dutyEnd.notes)")
                             }
                         }
@@ -51,33 +49,31 @@ struct LogbookView: View {
             }
         }
     }
-
+    
     private func deleteTimeModels(at offsets: IndexSet) {
         for index in offsets {
+            // get model at the index
             let timeModelToDelete = timeModels[index]
-            
-            // Check and delete associated flights
-            if let flight = timeModelToDelete.flightsStartingHere.first {
-                modelContext.delete(timeModelToDelete)
+                
+            // If timeModel is associated with a flight, delete flight -> cascade delete time
+            if let flight = timeModelToDelete.flightsStartingHere {
                 modelContext.delete(flight)
             }
             
-            // Check and delete associated duties starting here
-            else if let dutyStart = timeModelToDelete.dutiesStartingHere.first {
-                if let endTimeToDelete = dutyStart.endTime{
-                    modelContext.delete(timeModelToDelete)
+            // Same logic, but will cascade delete start and end times
+            if let dutyStart = timeModelToDelete.dutiesStartingHere {
+                if let endTimeToDelete = dutyStart.endTime {
                     modelContext.delete(endTimeToDelete)
-                    modelContext.delete(dutyStart)
                 }
+                modelContext.delete(dutyStart)
             }
             
-            // Check and delete associated duties ending here
-            else if let dutyEnd = timeModelToDelete.dutiesEndingHere.first {
+            // Same logic here.
+            if let dutyEnd = timeModelToDelete.dutiesEndingHere {
                 if let startTimeToDelete = dutyEnd.startTime {
                     modelContext.delete(startTimeToDelete)
-                    modelContext.delete(timeModelToDelete)
-                    modelContext.delete(dutyEnd)
                 }
+                modelContext.delete(dutyEnd)
             }
             
             // Save changes to the context
@@ -87,7 +83,5 @@ struct LogbookView: View {
                 print("Error saving context after deletion: \(error)")
             }
         }
-        
-        
     }
 }

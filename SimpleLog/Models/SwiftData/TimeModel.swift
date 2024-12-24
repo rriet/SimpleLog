@@ -10,23 +10,22 @@ import SwiftData
 
 @Model
 class TimeModel {
-    var id: UUID
+    
     var timestamp: Int
     
     @Relationship(deleteRule: .noAction, inverse: \FlightModel.startTime)
-    var flightsStartingHere: [FlightModel] = []
+    var flightsStartingHere: FlightModel? = nil
     
     @Relationship(deleteRule: .noAction, inverse: \DutyPeriodModel.startTime)
-    var dutiesStartingHere: [DutyPeriodModel] = []
+    var dutiesStartingHere: DutyPeriodModel? = nil
     
     @Relationship(deleteRule: .noAction, inverse: \DutyPeriodModel.endTime)
-    var dutiesEndingHere: [DutyPeriodModel] = []
+    var dutiesEndingHere: DutyPeriodModel? = nil
     
+    // initializes the time with current EPOCH
     init(
-        id: UUID = UUID(),
         timestamp: Int = Int(Date().timeIntervalSince1970 / 60)
     ) {
-        self.id = id
         self.timestamp = timestamp
     }
 }

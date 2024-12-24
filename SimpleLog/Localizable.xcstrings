@@ -41,6 +41,15 @@
     "Dismiss Window" : {
 
     },
+    "Duty End Time: %lld" : {
+
+    },
+    "Duty Start Time: %lld" : {
+
+    },
+    "Flight End Time: %lld" : {
+
+    },
     "Flight Start Time: %lld" : {
 
     },

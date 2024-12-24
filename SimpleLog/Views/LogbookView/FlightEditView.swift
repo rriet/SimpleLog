@@ -65,14 +65,14 @@ struct viewiPhone: View {
     func addSampleData() {
         // Create random airports
         let airport1 = AirportModel(
-            ICAO: "JFK",
+            icao: "JFK",
             name: "John F. Kennedy International Airport",
             latitude: 40.6413,
             longitude: -73.7781
         )
         
         let airport2 = AirportModel(
-            ICAO: "LAX",
+            icao: "LAX",
             name: "Los Angeles International Airport",
             latitude: 33.9416,
             longitude: -118.4085

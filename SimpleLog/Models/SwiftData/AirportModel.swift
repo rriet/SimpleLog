@@ -10,9 +10,12 @@ import SwiftData
 
 @Model
 class AirportModel: Identifiable {
-    var id: UUID
-    var ICAO: String
+
+    var icao: String
+    var iata: String
     var name: String
+    var city: String
+    var country: String
     var latitude: Double
     var longitude: Double
     
@@ -24,10 +27,20 @@ class AirportModel: Identifiable {
     @Relationship(deleteRule: .deny, inverse: \FlightModel.arrivalPlace)
     var arrivalFlights: [FlightModel] = []
     
-    init(ICAO: String = "", name: String = "", latitude: Double = 0.00, longitude: Double = 0.00) {
-        self.id = UUID()
-        self.ICAO = ICAO
+    init(
+        icao: String = "",
+        iata: String = "",
+        name: String = "",
+        city: String = "",
+        country: String = "",
+        latitude: Double = 0.00,
+        longitude: Double = 0.00
+    ) {
+        self.icao = icao
+        self.iata = iata
         self.name = name
+        self.city = city
+        self.country = country
         self.latitude = latitude
         self.longitude = longitude
     }

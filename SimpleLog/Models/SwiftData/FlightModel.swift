@@ -11,11 +11,10 @@ import SwiftData
 
 @Model
 class FlightModel {
-//    @Relationship(deleteRule: .noAction)
-    var startTime: TimeModel?
+    @Relationship(deleteRule: .cascade) var startTime: TimeModel?
     var endTime: Int
-    var departurePlace: AirportModel
-    var arrivalPlace: AirportModel
+    var departurePlace: AirportModel?
+    var arrivalPlace: AirportModel?
     var flightTime: Int
     
     init(
@@ -30,5 +29,11 @@ class FlightModel {
         self.departurePlace = departurePlace
         self.arrivalPlace = arrivalPlace
         self.flightTime = flightTime
+    }
+}
+
+extension FlightModel {
+    var startTimeInt: Int {
+        return startTime?.timestamp ?? 0
     }
 }

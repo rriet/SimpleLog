@@ -16,23 +16,33 @@ struct SchedulableEvent: Identifiable {
 
 class LogbookViewModel: ObservableObject {
     func addSampleData(context: ModelContext) {
-        let sampleAirport = AirportModel(ICAO: "KATL", name: "Atlanta Airport", latitude: 33.6407, longitude: -84.4277)
+        let sampleAirport = AirportModel(icao: "KATL", name: "Atlanta Airport", latitude: 33.6407, longitude: -84.4277)
+        let sampleAirport2 = AirportModel(icao: "KMIA", name: "Miami Airport", latitude: 33.6407, longitude: -84.4277)
         
         let flight = FlightModel(
-//            startTime: Int(Date().timeIntervalSince1970 / 60),
+            startTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 60)),
             endTime: Int(Date().timeIntervalSince1970 / 60 + 120),
             departurePlace: sampleAirport,
+            arrivalPlace: sampleAirport2,
+            flightTime: 120
+        )
+        let flight2 = FlightModel(
+            startTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 200)),
+            endTime: Int(Date().timeIntervalSince1970 / 60 + 180),
+            departurePlace: sampleAirport2,
             arrivalPlace: sampleAirport,
             flightTime: 120
         )
         let dutyPeriod = DutyPeriodModel(
-//            startTime: Int(Date().timeIntervalSince1970 / 60),
-//            endTime: Int(Date().timeIntervalSince1970 / 60 + 480),
+            startTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 80)),
+            endTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 160)
+            ),
             totalDutyTime: 480,
             notes: "Example Duty Period"
         )
         
         context.insert(flight)
+        context.insert(flight2)
         context.insert(dutyPeriod)
         
         do {
