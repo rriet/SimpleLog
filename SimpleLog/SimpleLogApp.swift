@@ -13,9 +13,13 @@ struct SimpleLogApp: App {
     // SwiftData initialization
     var sharedModelContainer: ModelContainer = {
         let schema:Schema = Schema([
+            AircraftModel.self,
             AirportModel.self,
+            CrewModel.self,
             DutyPeriodModel.self,
             FlightModel.self,
+            TimeModel.self,
+            TypesModel.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

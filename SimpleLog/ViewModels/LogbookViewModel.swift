@@ -19,11 +19,15 @@ class LogbookViewModel: ObservableObject {
         let sampleAirport = AirportModel(icao: "KATL", name: "Atlanta Airport", latitude: 33.6407, longitude: -84.4277)
         let sampleAirport2 = AirportModel(icao: "KMIA", name: "Miami Airport", latitude: 33.6407, longitude: -84.4277)
         
+        let bird1 = AircraftModel(registration: "PT-PTU")
+        let bird2 = AircraftModel(registration: "A7-BPP")
+        
         let flight = FlightModel(
             startTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 60)),
             endTime: Int(Date().timeIntervalSince1970 / 60 + 120),
             departurePlace: sampleAirport,
             arrivalPlace: sampleAirport2,
+            aircraft: bird1,
             flightTime: 120
         )
         let flight2 = FlightModel(
@@ -31,6 +35,7 @@ class LogbookViewModel: ObservableObject {
             endTime: Int(Date().timeIntervalSince1970 / 60 + 180),
             departurePlace: sampleAirport2,
             arrivalPlace: sampleAirport,
+            aircraft: bird2,
             flightTime: 120
         )
         let dutyPeriod = DutyPeriodModel(

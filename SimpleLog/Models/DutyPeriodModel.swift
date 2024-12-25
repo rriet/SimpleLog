@@ -11,8 +11,11 @@ import SwiftData
 @Model
 class DutyPeriodModel {
     
-    @Relationship(deleteRule: .cascade) var startTime: TimeModel?
-    @Relationship(deleteRule: .cascade) var endTime: TimeModel?
+    @Relationship(deleteRule: .cascade, inverse: \TimeModel.dutiesStartingHere)
+    var startTimeRelationship: TimeModel?
+    @Relationship(deleteRule: .cascade, inverse: \TimeModel.dutiesEndingHere)
+    var endTimeRelationship: TimeModel?
+    
     var totalDutyTime: Int
     var factoredDutyTime: Int
     var notes: String
@@ -24,20 +27,21 @@ class DutyPeriodModel {
         factoredDutyTime: Int = 0,
         notes: String = ""
     ) {
-        self.startTime = startTime
-        self.endTime = endTime
+        self.startTimeRelationship = startTime
+        self.endTimeRelationship = endTime
         self.totalDutyTime = totalDutyTime
         self.factoredDutyTime = factoredDutyTime
         self.notes = notes
     }
 }
 
+// Unwraping model variables
 extension DutyPeriodModel {
-    var startTimeInt: Int {
-        return startTime?.timestamp ?? 0
+    var startTime: Int {
+        return startTimeRelationship?.timestamp ?? 0
     }
     
-    var endTimeInt: Int {
-        return endTime?.timestamp ?? 0
+    var endTime: Int {
+        return endTimeRelationship?.timestamp ?? 0
     }
 }

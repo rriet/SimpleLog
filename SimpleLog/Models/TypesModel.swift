@@ -60,6 +60,8 @@ class TypesModel: Identifiable {
     var Complex: Bool
     var highPerformance: Bool
     
+    var aircraftsWithType: [AircraftModel] = []
+    
     init(
         designator: String = "",
         modelName: String = "",

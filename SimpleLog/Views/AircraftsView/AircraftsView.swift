@@ -9,46 +9,45 @@ import SwiftUI
 import SwiftData
 
 struct AircraftsView: View {
-//    @Environment(\.modelContext) private var modelContext
-    
-//    // Using @Query to fetch FlightModel and DutyPeriodModel, sorted by startTime
-//    @Query(sort: \FlightModel.startTime) private var flights: [FlightModel]
-//    @Query(sort: \DutyPeriodModel.startTime) private var dutyPeriods: [DutyPeriodModel]
-//    
+    @Environment(\.modelContext) private var modelContext
+    @Query var aircrafts: [AircraftModel]
+      
     var body: some View {
         VStack {
-            Button("Add Random Data") {
+            Button("Add Random Aircraft") {
 //                addSampleData()   Call the function to add data
             }
             
-            Button("Print Data Count") {
-//                fetchDataAndPrintCount() // Print the count of data in the context
+            List {
+                // Display Duty Periods first
+                ForEach(aircrafts) { aircraft in
+                    VStack(alignment: .leading) {
+                        Text("Aircraft: \(aircraft.registration)")
+                        .foregroundColor(.gray)
+                        
+                        ForEach(aircraft.flightsWithThisAircraft) { flt in
+                            Text("Flight: \(flt.departurePlace?.icao ?? "Nil")")
+                        }
+                        
+                    }
+                    .padding()
+                    .swipeActions {
+                        Button("Delete", systemImage: "trash", role: .destructive) {
+                            deleteAirc(aircraft: aircraft)
+                        }
+                    }
+                }
             }
-            
-//            List {
-//                // Display Duty Periods first
-//                ForEach(dutyPeriods) { duty in
-//                    VStack(alignment: .leading) {
-//                        Text("Duty Start: \(duty.startTime)")
-//                        Text("Duty End: \(duty.endTime)")
-//                        Text("Total Duty Time: \(duty.totalDutyTime) minutes")
-//                            .foregroundColor(.gray)
-//                    }
-//                    .padding()
-//                }
-//                
-//                // Then display Flights
-//                ForEach(flights) { flight in
-//                    VStack(alignment: .leading) {
-//                        Text("Flight from \(flight.departurePlace.name) to \(flight.arrivalPlace.name)")
-//                        Text("Start Time: \(flight.startTime)")
-//                        Text("End Time: \(flight.endTime)")
-//                        Text("Flight Time: \(flight.flightTime) minutes")
-//                            .foregroundColor(.gray)
-//                    }
-//                    .padding()
-//                }
-//            }
+        }
+    }
+    
+    private func deleteAirc (aircraft: AircraftModel){
+        modelContext.delete(aircraft)
+        // Save changes to the context
+        do {
+            try modelContext.save()
+        } catch {
+            print("Error saving context after deletion: \(error)")
         }
     }
 }
