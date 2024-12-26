@@ -22,9 +22,7 @@ class FlightModel {
     // Arrival Airport
     var arrivalPlace: AirportModel?
     
-//     Aircraft (Deny deletting aircraft)
-    @Relationship(deleteRule: .deny, inverse: \AircraftModel.flightsWithThisAircraft)
-    var aircraft: AircraftModel
+    var aircraft: AircraftModel?
     
     var flightTime: Int
     

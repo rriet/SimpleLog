@@ -7,9 +7,6 @@
     "About" : {
 
     },
-    "Add Random Aircraft" : {
-
-    },
     "Add Random Flights" : {
 
     },
@@ -19,6 +16,12 @@
     "Airports" : {
 
     },
+    "An error occurred while deleting the aircraft." : {
+
+    },
+    "Are you sure you want to delete %@?" : {
+
+    },
     "Associated Duty: %@" : {
 
     },
@@ -26,6 +29,9 @@
 
     },
     "Delete" : {
+
+    },
+    "Delete Aircraft" : {
 
     },
     "Departure: %@ → Arrival: %@" : {
@@ -50,6 +56,12 @@
     "Duty Start Time: %lld" : {
 
     },
+    "Edit" : {
+
+    },
+    "Error" : {
+
+    },
     "Flight End Time: %lld" : {
 
     },
@@ -71,6 +83,9 @@
     "Notes: %@" : {
 
     },
+    "OK" : {
+
+    },
     "Open" : {
 
     },
@@ -87,6 +102,9 @@
 
     },
     "Summary" : {
+
+    },
+    "The selected aircraft cannot be deleted because it is associated with one or more flights." : {
 
     },
     "Time: %lld" : {

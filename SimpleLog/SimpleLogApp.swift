@@ -10,6 +10,10 @@ import SwiftData
 
 @main
 struct SimpleLogApp: App {
+    
+    
+    
+    
     // SwiftData initialization
     var sharedModelContainer: ModelContainer = {
         let schema:Schema = Schema([
@@ -56,5 +60,10 @@ struct SimpleLogApp: App {
     init() {
         disallowTabbingMode()
     }
+#else
+    init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    }
 #endif
+    
 }

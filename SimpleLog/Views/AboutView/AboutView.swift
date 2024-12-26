@@ -87,11 +87,6 @@ struct FloatingButtonModifier: ViewModifier {
     }
 }
 
-
-
-
-
-
 #Preview("Light") {
     AboutView()
 }

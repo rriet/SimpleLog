@@ -17,17 +17,25 @@ class AircraftModel: Identifiable {
     var aircraftType: TypesModel?
     
     // List all the flights with this Aircraft
-    var flightsWithThisAircraft: [FlightModel] = []
+    var flightsWithThisAircraft: [FlightModel]?
     
     init(
         registration: String = "",
         aircraftMtow: Int = 0,
-        isSimulator: Bool = false,
-        aircraftType: TypesModel? = nil
+        isSimulator: Bool = false
     ) {
         self.registration = registration
         self.aircraftMtow = aircraftMtow
         self.isSimulator = isSimulator
-        self.aircraftType = aircraftType
+    }
+}
+
+// Unwraping model variables
+extension AircraftModel {
+    var hasFlights: Bool {
+        if let flights = self.flightsWithThisAircraft {
+            return flights.count > 0
+        }
+        return false
     }
 }

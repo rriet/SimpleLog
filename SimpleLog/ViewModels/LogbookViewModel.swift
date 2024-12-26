@@ -5,16 +5,29 @@
 //  Created by Ricardo Brito Riet Correa on 12/22/24.
 //
 
-import Foundation
+import SwiftUICore
 import SwiftData
 
-struct SchedulableEvent: Identifiable {
-    var id: UUID
-    var startTime: Int
-    var title: String
-}
-
 class LogbookViewModel: ObservableObject {
+    private var modelContext:ModelContext
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
+    
+    func deleteFlight(flightToDelete: FlightModel) -> Bool {
+        
+        modelContext.delete(flightToDelete)
+        
+        // Save changes to the context
+        do {
+            try modelContext.save()
+        } catch {
+            return false
+        }
+        return true
+    }
+    
     func addSampleData(context: ModelContext) {
         let sampleAirport = AirportModel(icao: "KATL", name: "Atlanta Airport", latitude: 33.6407, longitude: -84.4277)
         let sampleAirport2 = AirportModel(icao: "KMIA", name: "Miami Airport", latitude: 33.6407, longitude: -84.4277)
@@ -51,7 +64,6 @@ class LogbookViewModel: ObservableObject {
         context.insert(dutyPeriod)
         
         do {
-            print("Saved")
             try context.save()
         } catch {
             print("Error adding data: \(error)")

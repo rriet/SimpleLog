@@ -11,12 +11,10 @@ struct LogbookView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var timeModels: [TimeModel]
     
-    @StateObject private var viewModel = LogbookViewModel()
-    
     var body: some View {
         VStack {
             Button("Add Random Flights") {
-                viewModel.addSampleData(context: modelContext)
+                LogbookViewModel(modelContext: modelContext).addSampleData(context: modelContext)
             }
             
             List {
@@ -28,8 +26,21 @@ struct LogbookView: View {
                                 Text("Flight Start Time: \(flight.startTimeInt)")
                                 Text("Flight End Time: \(flight.endTime)")
                                 Text("Departure: \(flight.departurePlace?.name ?? "") → Arrival: \(flight.arrivalPlace?.name ?? "")")
-                                Text("Aircraft: \(flight.aircraft.registration)")
+                                Text("Aircraft: \(flight.aircraft?.registration ?? "Not Found")")
 //                                Text("Aircraft: \(flight.aircraft?.registration ?? "Not Found")")
+                            }
+                            .swipeActions(allowsFullSwipe: false) {
+                                Button(
+                                    "Delete",
+                                    systemImage: "trash",
+                                    role: .destructive
+                                ){
+                                    deleteFlight(flightToDelete: flight)
+                                }
+                                Button("Edit", systemImage: "pencil") {
+                                    //                            deleteAirc(aircraft: aircraft)
+                                }
+                                .tint(.green)
                             }
                         }
                         else if let duty = timeModel.dutiesStartingHere {
@@ -50,6 +61,14 @@ struct LogbookView: View {
                 }
                 .onDelete(perform: deleteTimeModels)
             }
+        }
+    }
+    
+    private func deleteFlight(flightToDelete: FlightModel) {
+        if LogbookViewModel(modelContext: modelContext).deleteFlight(flightToDelete: flightToDelete) {
+            print("Deleted - LogbookView")
+        } else {
+            print("Error - LogbookView")
         }
     }
     
@@ -81,7 +100,6 @@ struct LogbookView: View {
             
             // Save changes to the context
             do {
-                print ("Saved - Logbookview ")
                 try modelContext.save()
             } catch {
                 print("Error saving context after deletion: \(error)")
