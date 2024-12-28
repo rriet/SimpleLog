@@ -22,7 +22,7 @@ struct SimpleLogApp: App {
             CrewModel.self,
             DutyPeriodModel.self,
             FlightModel.self,
-            TimeModel.self,
+            TimelineModel.self,
             TypesModel.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)

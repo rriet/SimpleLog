@@ -19,13 +19,8 @@ class AirportModel: Identifiable {
     var latitude: Double
     var longitude: Double
     
-    // Add a relationship to flights Deperture
-    @Relationship(deleteRule: .deny, inverse: \FlightModel.departurePlace)
-    var departureFlights: [FlightModel] = []
-    
-    // Add a relationship to flights Arrival
-    @Relationship(deleteRule: .deny, inverse: \FlightModel.arrivalPlace)
-    var arrivalFlights: [FlightModel] = []
+    var departureFlightsRelationship: [FlightModel]?
+    var arrivalFlightsRelationship: [FlightModel]?
     
     init(
         icao: String = "",
@@ -43,5 +38,16 @@ class AirportModel: Identifiable {
         self.country = country
         self.latitude = latitude
         self.longitude = longitude
+    }
+}
+
+// Unwraping model variables
+extension AirportModel {
+    var departureFlights: [FlightModel] {
+        departureFlightsRelationship ?? []
+    }
+    
+    var arrivalFlights: [FlightModel] {
+        arrivalFlightsRelationship ?? []
     }
 }

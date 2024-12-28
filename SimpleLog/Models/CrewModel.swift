@@ -16,9 +16,7 @@ class CrewModel: Identifiable {
     var phone: String
     var coments: String
     
-//    // Add a relationship to flights Deperture
-//    @Relationship(deleteRule: .deny, inverse: \FlightModel.departurePlace)
-//    var departureFlights: [FlightModel] = []
+    var flightsRelationship: [FlightModel]?
     
     init(
         name: String = "",
@@ -30,5 +28,12 @@ class CrewModel: Identifiable {
         self.email = email
         self.phone = phone
         self.coments = coments
+    }
+}
+
+// Unwraping model variables
+extension CrewModel {
+    var departureFlights: [FlightModel] {
+        flightsRelationship ?? []
     }
 }

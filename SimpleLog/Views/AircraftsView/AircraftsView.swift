@@ -32,9 +32,9 @@ struct AircraftsView: View {
                         Text("Aircraft: \(aircraft.registration)")
                             .foregroundColor(.gray)
                         
-                        if let flights = aircraft.flightsWithThisAircraft {
-                            ForEach(flights) { flight in
-                                Text("Flight: \(flight.departurePlace?.icao ?? "Nil")")
+                        if aircraft.hasFlights {
+                            ForEach(aircraft.flights) { flight in
+                                Text("Flight: \(flight.departurePlaceReletionship?.icao ?? "Nil")")
                             }
                         }
                     }
@@ -68,17 +68,18 @@ struct AircraftsView: View {
             ),
             action: {
                 showAddEdit.toggle()
-                print("Floating button pressed!")
             }
         )
+        
+        // Edit Screen
 #if os(iOS)
         .fullScreenCover(isPresented: $showAddEdit, content: {
-            FlightEditView()
+            // TODO:
         })
 #else
         // sheet works on all systems, but is dismissible on IOS, not dismissible on MacOS
         .sheet(isPresented: $showAddEdit) {
-            FlightEditView()
+            // TODO:
         }
 #endif
     }

@@ -60,7 +60,7 @@ class TypesModel: Identifiable {
     var Complex: Bool
     var highPerformance: Bool
     
-    var aircraftsWithType: [AircraftModel] = []
+    var aircraftsRelationship: [AircraftModel]?
     
     init(
         designator: String = "",
@@ -90,5 +90,12 @@ class TypesModel: Identifiable {
         self.efis = efis
         self.Complex = Complex
         self.highPerformance = highPerformance
+    }
+}
+
+// Unwraping model variables
+extension TypesModel {
+    var aircrafts: [AircraftModel] {
+        aircraftsRelationship ?? []
     }
 }

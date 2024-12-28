@@ -36,7 +36,7 @@ class LogbookViewModel: ObservableObject {
         let bird2 = AircraftModel(registration: "A7-BPP")
         
         let flight = FlightModel(
-            startTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 60)),
+            startTime: Int(Date().timeIntervalSince1970 / 60),
             endTime: Int(Date().timeIntervalSince1970 / 60 + 120),
             departurePlace: sampleAirport,
             arrivalPlace: sampleAirport2,
@@ -44,7 +44,7 @@ class LogbookViewModel: ObservableObject {
             flightTime: 120
         )
         let flight2 = FlightModel(
-            startTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 200)),
+            startTime: Int(Date().timeIntervalSince1970 / 200),
             endTime: Int(Date().timeIntervalSince1970 / 60 + 180),
             departurePlace: sampleAirport2,
             arrivalPlace: sampleAirport,
@@ -52,9 +52,8 @@ class LogbookViewModel: ObservableObject {
             flightTime: 120
         )
         let dutyPeriod = DutyPeriodModel(
-            startTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 80)),
-            endTime: TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 160)
-            ),
+            startTime: Int(Date().timeIntervalSince1970 / 80),
+            endTime: Int(Date().timeIntervalSince1970 / 160),
             totalDutyTime: 480,
             notes: "Example Duty Period"
         )

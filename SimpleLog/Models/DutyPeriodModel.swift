@@ -11,24 +11,24 @@ import SwiftData
 @Model
 class DutyPeriodModel {
     
-    @Relationship(deleteRule: .cascade, inverse: \TimeModel.dutiesStartingHere)
-    var startTimeRelationship: TimeModel?
-    @Relationship(deleteRule: .cascade, inverse: \TimeModel.dutiesEndingHere)
-    var endTimeRelationship: TimeModel?
+    @Relationship(deleteRule: .cascade, inverse: \TimelineModel.dutieStartRelationship)
+    var startTimeRelationship: TimelineModel?
+    @Relationship(deleteRule: .cascade, inverse: \TimelineModel.dutieEndRelationship)
+    var endTimeRelationship: TimelineModel?
     
     var totalDutyTime: Int
     var factoredDutyTime: Int
     var notes: String
     
     init(
-        startTime: TimeModel = TimeModel(),
-        endTime: TimeModel = TimeModel(timestamp: Int(Date().timeIntervalSince1970 / 60 + 120)),
+        startTime: Int = Int(Date().timeIntervalSince1970 / 60),
+        endTime: Int = Int(Date().timeIntervalSince1970 / 60),
         totalDutyTime: Int = 0,
         factoredDutyTime: Int = 0,
         notes: String = ""
     ) {
-        self.startTimeRelationship = startTime
-        self.endTimeRelationship = endTime
+        self.startTimeRelationship = TimelineModel(timestamp: startTime)
+        self.endTimeRelationship = TimelineModel(timestamp: endTime)
         self.totalDutyTime = totalDutyTime
         self.factoredDutyTime = factoredDutyTime
         self.notes = notes
