@@ -26,7 +26,7 @@ struct LogbookView: View {
                             VStack(alignment: .leading) {
                                 Text("Duty Start Time: \(duty.startTime)")
                                 Text("Duty End Time: \(duty.endTime)")
-                                Text("Total Duty Time: \(duty.totalDutyTime) minutes")
+                                Text("Total Duty Time: \(duty.totalDutyTimeFormatted) minutes")
                                 Text("Notes: \(duty.notes)")
                             }
                         } else if event.hasDutieEnd {

@@ -110,6 +110,9 @@
     "Time: %lld" : {
 
     },
+    "Total Duty Time: %@ minutes" : {
+
+    },
     "Total Duty Time: %lld minutes" : {
 
     }
