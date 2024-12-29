@@ -1,20 +1,20 @@
 //
-//  AircraftsView.swift
+//  TypesView.swift
 //  SimpleLog
 //
-//  Created by Ricardo Brito Riet Correa on 12/19/24.
+//  Created by Ricardo Brito Riet Correa on 12/28/24.
 //
 
 import SwiftUI
 import SwiftData
 
-struct AircraftsView: View {
+struct TypesView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query var aircrafts: [AircraftModel]
+    @Query var typeList: [TypesModel]
     
     @State private var showAddEdit = false
     @State private var alertType: MyAlerts? = nil
-    @State private var selectedAircraft: AircraftModel?
+    @State private var selectedType: TypesModel?
     
     enum MyAlerts: Identifiable {
         case notEmpty
@@ -26,29 +26,32 @@ struct AircraftsView: View {
     
     var body: some View {
         VStack {
+            Text("Types")
+                .font(.largeTitle)
+                .padding(.top, 0)
             List {
-                ForEach(aircrafts) { aircraft in
+                ForEach(typeList) { type in
                     VStack(alignment: .leading) {
-                        Text("Aircraft: \(aircraft.registration)")
+                        Text("Type: \(type.designator)")
                             .foregroundColor(.gray)
                         
-                        if aircraft.hasFlights {
-                            ForEach(aircraft.flights) { flight in
-                                Text("Flight: \(flight.departurePlaceReletionship?.icao ?? "Nil")")
+                        if type.hasAircraft {
+                            ForEach(type.aircrafts) { aircraft in
+                                Text("Aircraft: \(aircraft.registration)")
                             }
                         }
                     }
                     .padding()
                     .swipeActions(allowsFullSwipe: false) {
-                        Button("Delete", systemImage: aircraft.hasFlights ? "trash.slash" : "trash") {
-                            if aircraft.hasFlights {
+                        Button("Delete", systemImage: type.hasAircraft ? "trash.slash" : "trash") {
+                            if type.hasAircraft {
                                 alertType = .notEmpty
                             } else {
-                                selectedAircraft = aircraft
+                                selectedType = type
                                 alertType = .deleteConfirmation
                             }
                         }
-                        .tint(aircraft.hasFlights ? .gray : .red)
+                        .tint(type.hasAircraft ? .gray : .red)
                         Button("Edit", systemImage: "pencil") {
                             // Edit action
                         }
@@ -56,10 +59,11 @@ struct AircraftsView: View {
                     }
                 }
             }
-            .alert(item: $alertType) { alertType in
-                myAlert()
-            }
         }
+        .alert(item: $alertType) { alertType in
+            myAlert()
+        }
+        .background(Color(UIColor.secondarySystemBackground))
         .floatingButton(
             buttonContent: AnyView(
                 Image(systemName: "plus")
@@ -86,17 +90,17 @@ struct AircraftsView: View {
     
     private func deleteAircraft() {
         
-        guard let aircraftToDelete = selectedAircraft else {
+        guard let typeToDelete = selectedType else {
             return
         }
         
         do {
-            try AircraftViewModel(modelContext: modelContext)
-                .deleteAircraft(aircraftToDelete: aircraftToDelete)
+            try TypeViewModel(modelContext: modelContext)
+                .deleteType(typeToDelete: typeToDelete)
         } catch {
             alertType = .error
         }
-        selectedAircraft = nil
+        selectedType = nil
     }
     
     private func myAlert() -> Alert {
@@ -104,7 +108,7 @@ struct AircraftsView: View {
             case .notEmpty:
                 return Alert(
                     title: Text("Error"),
-                    message: Text("The selected aircraft cannot be deleted because it is associated with one or more flights."),
+                    message: Text("The selected Type cannot be deleted because it is associated with one or more Aircrafts."),
                     dismissButton: .default(Text("OK")) {
                         alertType = nil
                     }
@@ -112,7 +116,7 @@ struct AircraftsView: View {
             case .deleteConfirmation:
                 return Alert(
                     title: Text("Delete Aircraft"),
-                    message: Text("Are you sure you want to delete \(selectedAircraft?.registration ?? "this aircraft")?"),
+                    message: Text("Are you sure you want to delete this Type"),
                     primaryButton: .destructive(Text("Delete")) {
                         deleteAircraft()
                     },
@@ -123,7 +127,7 @@ struct AircraftsView: View {
             case .error, .none:
                 return Alert(
                     title: Text("Error"),
-                    message: Text("An error occurred while deleting the aircraft."),
+                    message: Text("An error occurred while deleting the type."),
                     dismissButton: .default(Text("OK")) {
                         alertType = nil
                     }
@@ -131,3 +135,4 @@ struct AircraftsView: View {
         }
     }
 }
+

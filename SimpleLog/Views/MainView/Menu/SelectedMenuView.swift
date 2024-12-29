@@ -16,7 +16,7 @@ struct SelectedMenuView: View {
             case .LogbookView:
                 LogbookView()
             case .AircraftsView:
-                AircraftsView()
+                AircraftAndTypesView()
             case .AirportsView:
                 AirportsView()
             case .CrewView:

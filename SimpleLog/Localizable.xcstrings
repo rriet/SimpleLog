@@ -13,13 +13,22 @@
     "Aircraft: %@" : {
 
     },
+    "Aircrafts" : {
+
+    },
     "Airports" : {
 
     },
     "An error occurred while deleting the aircraft." : {
 
     },
+    "An error occurred while deleting the type." : {
+
+    },
     "Are you sure you want to delete %@?" : {
+
+    },
+    "Are you sure you want to delete this Type" : {
 
     },
     "Associated Duty: %@" : {
@@ -92,6 +101,9 @@
     "Reports" : {
 
     },
+    "Select View" : {
+
+    },
     "Settings" : {
 
     },
@@ -107,6 +119,9 @@
     "The selected aircraft cannot be deleted because it is associated with one or more flights." : {
 
     },
+    "The selected Type cannot be deleted because it is associated with one or more Aircrafts." : {
+
+    },
     "Time: %lld" : {
 
     },
@@ -114,6 +129,12 @@
 
     },
     "Total Duty Time: %lld minutes" : {
+
+    },
+    "Type: %@" : {
+
+    },
+    "Types" : {
 
     }
   },

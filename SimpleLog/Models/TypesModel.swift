@@ -110,6 +110,12 @@ class TypesModel: Identifiable {
 
 extension TypesModel {
     
+    /// Indicates whether the Type has any associated Aircraft.
+    /// - Returns: `true` if the Type has one or more Aircraft; otherwise, `false`.
+    var hasAircraft: Bool {
+        !aircrafts.isEmpty
+    }
+    
     /// Returns a list of `AircraftModel` instances associated with this aircraft type.
     /// - If no relationships are set, returns an empty array.
     var aircrafts: [AircraftModel] {
