@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		896488622D31E22E00E2FE69 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896488602D31E22E00E2FE69 /* Item+CoreDataClass.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		896488492D31E06100E2FE69 /* SimpleLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		896488602D31E22E00E2FE69 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		896488402D31E06100E2FE69 = {
 			isa = PBXGroup;
 			children = (
+				896488602D31E22E00E2FE69 /* Item+CoreDataClass.swift */,
 				8964884B2D31E06100E2FE69 /* SimpleLog */,
 				8964884A2D31E06100E2FE69 /* Products */,
 			);
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				896488622D31E22E00E2FE69 /* Item+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
